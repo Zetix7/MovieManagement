@@ -11,7 +11,7 @@ using MovieManagement.DataAccess;
 namespace MovieManagement.DataAccess.Migrations
 {
     [DbContext(typeof(MovieManagementStorageContext))]
-    [Migration("20240425085726_AddActor")]
+    [Migration("20240425092918_AddActor")]
     partial class AddActor
     {
         /// <inheritdoc />
@@ -57,7 +57,7 @@ namespace MovieManagement.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actor");
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("MovieManagement.DataAccess.Entities.Movie", b =>

@@ -54,7 +54,7 @@ namespace MovieManagement.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actor");
+                    b.ToTable("Actors");
                 });
 
             modelBuilder.Entity("MovieManagement.DataAccess.Entities.Movie", b =>

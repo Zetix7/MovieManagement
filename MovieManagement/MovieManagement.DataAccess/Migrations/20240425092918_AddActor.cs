@@ -11,7 +11,7 @@ namespace MovieManagement.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Actor",
+                name: "Actors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,7 +21,7 @@ namespace MovieManagement.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actor", x => x.Id);
+                    table.PrimaryKey("PK_Actors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,9 +35,9 @@ namespace MovieManagement.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_ActorMovie", x => new { x.ActorsId, x.MoviesId });
                     table.ForeignKey(
-                        name: "FK_ActorMovie_Actor_ActorsId",
+                        name: "FK_ActorMovie_Actors_ActorsId",
                         column: x => x.ActorsId,
-                        principalTable: "Actor",
+                        principalTable: "Actors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -61,7 +61,7 @@ namespace MovieManagement.DataAccess.Migrations
                 name: "ActorMovie");
 
             migrationBuilder.DropTable(
-                name: "Actor");
+                name: "Actors");
         }
     }
 }
