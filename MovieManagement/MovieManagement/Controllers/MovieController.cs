@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.DataAccess;
 using MovieManagement.DataAccess.Entities;
 
@@ -9,17 +11,20 @@ namespace MovieManagement.Controllers;
 public class MovieController : ControllerBase
 {
     private readonly IRepository<Movie> _movieRepository;
+    private readonly IMediator _mediator;
 
-    public MovieController(IRepository<Movie> movieRepository)
+    public MovieController(IRepository<Movie> movieRepository, IMediator mediator)
     {
         _movieRepository = movieRepository;
+        _mediator = mediator;
     }
 
     [HttpGet]
     [Route("")]
-    public IEnumerable<Movie> GetAllMovies()
+    public async Task<IActionResult> GetAllMovies([FromQuery] GetMoviesRequest request)
     {
-        return _movieRepository.GetAll();
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 
     [HttpGet]
