@@ -5,6 +5,8 @@ namespace MovieManagement.DataAccess.Entities;
 
 public class Movie : EntityBase
 {
+    public List<Actor>? Actors { get; set; }
+
     [MaxLength(200)]
     public string? Title { get; set; }
 
