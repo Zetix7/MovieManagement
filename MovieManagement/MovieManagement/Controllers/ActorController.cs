@@ -22,4 +22,13 @@ public class ActorController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("{actorId}")]
+    public async Task<IActionResult> GetActorById(int actorId)
+    {
+        var request = new GetActorByIdRequest { Id = actorId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
