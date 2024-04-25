@@ -7,8 +7,8 @@ public class MovieManagementStorageContextFactory : IDesignTimeDbContextFactory<
 {
     public MovieManagementStorageContext CreateDbContext(string[] args)
     {
-        var optionBuilder = new DbContextOptionsBuilder<MovieManagementStorageContext>();
-        optionBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MovieManagementStorage;Integrated Security=True;Encrypt=False");
-        return new MovieManagementStorageContext(optionBuilder.Options);
+        var optionsBuilder = new DbContextOptionsBuilder<MovieManagementStorageContext>();
+        optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MovieManagementStorage;Integrated Security=True;Encrypt=False");
+        return new MovieManagementStorageContext(optionsBuilder.Options);
     }
 }
