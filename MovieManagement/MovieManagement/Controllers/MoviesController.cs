@@ -8,12 +8,12 @@ namespace MovieManagement.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MovieController : ControllerBase
+public class MoviesController : ControllerBase
 {
     private readonly IRepository<Movie> _movieRepository;
     private readonly IMediator _mediator;
 
-    public MovieController(IRepository<Movie> movieRepository, IMediator mediator)
+    public MoviesController(IRepository<Movie> movieRepository, IMediator mediator)
     {
         _movieRepository = movieRepository;
         _mediator = mediator;

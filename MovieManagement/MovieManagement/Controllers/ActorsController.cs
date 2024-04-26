@@ -6,11 +6,11 @@ namespace MovieManagement.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ActorController : ControllerBase
+public class ActorsController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public ActorController(IMediator mediator)
+    public ActorsController(IMediator mediator)
     {
         _mediator = mediator;
     }
