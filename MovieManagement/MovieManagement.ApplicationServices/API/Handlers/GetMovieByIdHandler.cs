@@ -17,13 +17,13 @@ public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovie
         _mapper = mapper;
     }
 
-    public Task<GetMovieByIdResponse> Handle(GetMovieByIdRequest request, CancellationToken cancellationToken)
+    public async Task<GetMovieByIdResponse> Handle(GetMovieByIdRequest request, CancellationToken cancellationToken)
     {
-        var movie = _movieRepository.GetById(request.Id);
+        var movie = await _movieRepository.GetById(request.Id);
         if(movie is null)
         {
             var failedResponse = new GetMovieByIdResponse();
-            return Task.FromResult(failedResponse);
+            return failedResponse;
         }
 
         var mappedMovie = _mapper.Map<Movie>(movie);
@@ -33,6 +33,6 @@ public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovie
             Data = mappedMovie,
         };
 
-        return Task.FromResult(response);
+        return response;
     }
 }

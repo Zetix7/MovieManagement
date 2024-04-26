@@ -17,16 +17,16 @@ public class GetActorsHandler : IRequestHandler<GetActorsRequest, GetActorsRespo
         _mapper = mapper;
     }
 
-    public Task<GetActorsResponse> Handle(GetActorsRequest request, CancellationToken cancellationToken)
+    public async Task<GetActorsResponse> Handle(GetActorsRequest request, CancellationToken cancellationToken)
     {
-        var actors = _actorRepository.GetAll();
-        var mappedActors = _mapper.Map<List<Actor>>(actors).ToList();
+        var actors = await _actorRepository.GetAll();
+        var mappedActors = _mapper.Map<List<Actor>>(actors);
 
         var response = new GetActorsResponse
         {
             Data = mappedActors,
         };
 
-        return Task.FromResult(response);
+        return response;
     }
 }

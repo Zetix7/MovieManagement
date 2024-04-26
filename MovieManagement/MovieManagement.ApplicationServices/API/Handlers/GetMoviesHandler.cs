@@ -17,16 +17,16 @@ public class GetMoviesHandler : IRequestHandler<GetMoviesRequest, GetMoviesRespo
         _mapper = mapper;
     }
 
-    public Task<GetMoviesResponse> Handle(GetMoviesRequest request, CancellationToken cancellationToken)
+    public async Task<GetMoviesResponse> Handle(GetMoviesRequest request, CancellationToken cancellationToken)
     {
-        var movies = _movieRepository.GetAll();
-        var mappedMovies = _mapper.Map<List<Movie>>(movies).ToList();
+        var movies = await _movieRepository.GetAll();
+        var mappedMovies = _mapper.Map<List<Movie>>(movies);
 
         var response = new GetMoviesResponse()
         {
             Data = mappedMovies
         };
 
-        return Task.FromResult(response);
+        return response;
     }
 }

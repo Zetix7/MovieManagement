@@ -15,17 +15,17 @@ public class Repository<T> : IRepository<T> where T : EntityBase
         _entities = context.Set<T>();
     }
 
-    public IEnumerable<T> GetAll()
+    public Task<List<T>> GetAll()
     {
-        return _entities.AsEnumerable();
+        return _entities.ToListAsync();
     }
 
-    public T GetById(int id)
+    public Task<T> GetById(int id)
     {
-        return _entities.SingleOrDefault(e => e.Id == id)!;
+        return _entities.SingleOrDefaultAsync(e => e.Id == id)!;
     }
 
-    public void Insert(T entity)
+    public async Task Insert(T entity)
     {
         if (entity is null)
         {
@@ -33,10 +33,10 @@ public class Repository<T> : IRepository<T> where T : EntityBase
         }
 
         _entities.Add(entity);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Update(T entity)
+    public async Task Update(T entity)
     {
         if (entity is null)
         {
@@ -44,9 +44,9 @@ public class Repository<T> : IRepository<T> where T : EntityBase
         }
 
         _entities.Update(entity);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
         T entityToDelete = _entities.SingleOrDefault(e => e.Id == id)!;
         if (entityToDelete is null)
@@ -55,7 +55,7 @@ public class Repository<T> : IRepository<T> where T : EntityBase
         }
 
         _entities.Remove(entityToDelete);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
 }

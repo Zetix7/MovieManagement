@@ -17,12 +17,12 @@ public class GetActorByIdHandler : IRequestHandler<GetActorByIdRequest, GetActor
         _mapper = mapper;
     }
 
-    public Task<GetActorByIdResponse> Handle(GetActorByIdRequest request, CancellationToken cancellationToken)
+    public async Task<GetActorByIdResponse> Handle(GetActorByIdRequest request, CancellationToken cancellationToken)
     {
-        var actor = _actorRepository.GetById(request.Id);
+        var actor = await _actorRepository.GetById(request.Id);
         if (actor is null)
         {
-            return Task.FromResult(new GetActorByIdResponse());
+            return new GetActorByIdResponse();
         }
         var mappedActor = _mapper.Map<Actor>(actor);
 
@@ -31,6 +31,6 @@ public class GetActorByIdHandler : IRequestHandler<GetActorByIdRequest, GetActor
             Data = mappedActor
         };
 
-        return Task.FromResult(response);
+        return response;
     }
 }
