@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.DataAccess;
@@ -8,10 +9,12 @@ namespace MovieManagement.ApplicationServices.API.Handlers;
 public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovieByIdResponse>
 {
     private readonly IRepository<DataAccess.Entities.Movie> _movieRepository;
+    private readonly IMapper _mapper;
 
-    public GetMovieByIdHandler(IRepository<DataAccess.Entities.Movie> movieRepository)
+    public GetMovieByIdHandler(IRepository<DataAccess.Entities.Movie> movieRepository, IMapper mapper)
     {
         _movieRepository = movieRepository;
+        _mapper = mapper;
     }
 
     public Task<GetMovieByIdResponse> Handle(GetMovieByIdRequest request, CancellationToken cancellationToken)
@@ -23,17 +26,11 @@ public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovie
             return Task.FromResult(failedResponse);
         }
 
-        var domainMovie = new Movie()
-        {
-            Title = movie.Title,
-            Year = movie.Year,
-            Universe = movie.Universe,
-            BoxOffice = movie.BoxOffice,
-        };
-
+        var mappedMovie = _mapper.Map<Movie>(movie);
+        
         var response = new GetMovieByIdResponse
         {
-            Data = domainMovie,
+            Data = mappedMovie,
         };
 
         return Task.FromResult(response);
