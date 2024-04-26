@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.ApplicationServices.API.Domain;
+using MovieManagement.ApplicationServices.Mappings;
 using MovieManagement.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddDbContext<MovieManagementStorageContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MovieManagementDatabaseConnection")));
 builder.Services.AddMediatR(typeof(ResponseBase<>));
+builder.Services.AddAutoMapper(typeof(MoviesProfile).Assembly);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
