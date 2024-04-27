@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MovieManagement.DataAccess.CQRS.Queries;
+﻿using MovieManagement.DataAccess.CQRS.Queries;
 
 namespace MovieManagement.DataAccess.CQRS;
 
