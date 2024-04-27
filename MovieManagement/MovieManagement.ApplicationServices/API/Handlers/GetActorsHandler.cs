@@ -2,24 +2,26 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
-using MovieManagement.DataAccess;
+using MovieManagement.DataAccess.CQRS;
+using MovieManagement.DataAccess.CQRS.Queries;
 
 namespace MovieManagement.ApplicationServices.API.Handlers;
 
 public class GetActorsHandler : IRequestHandler<GetActorsRequest, GetActorsResponse>
 {
-    private readonly IRepository<DataAccess.Entities.Actor> _actorRepository;
     private readonly IMapper _mapper;
+    private readonly IQueryExecutor _queryExecutor;
 
-    public GetActorsHandler(IRepository<DataAccess.Entities.Actor> actorRepository, IMapper mapper)
+    public GetActorsHandler(IMapper mapper, IQueryExecutor queryExecutor)
     {
-        _actorRepository = actorRepository;
         _mapper = mapper;
+        _queryExecutor = queryExecutor;
     }
 
     public async Task<GetActorsResponse> Handle(GetActorsRequest request, CancellationToken cancellationToken)
     {
-        var actors = await _actorRepository.GetAll();
+        var query = new GetActorsQuery();
+        var actors = await _queryExecutor.Execute(query);
         var mappedActors = _mapper.Map<List<Actor>>(actors);
 
         var response = new GetActorsResponse
