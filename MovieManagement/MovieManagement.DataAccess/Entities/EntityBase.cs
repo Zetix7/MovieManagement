@@ -2,7 +2,7 @@
 
 namespace MovieManagement.DataAccess.Entities;
 
-public class EntityBase
+public abstract class EntityBase
 {
     [Key]
     public int Id { get; set; }

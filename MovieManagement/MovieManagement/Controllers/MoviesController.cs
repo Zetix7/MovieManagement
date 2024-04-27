@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MovieManagement.ApplicationServices.API.Domain;
-using MovieManagement.DataAccess;
-using MovieManagement.DataAccess.Entities;
 
 namespace MovieManagement.Controllers;
 
@@ -10,12 +8,10 @@ namespace MovieManagement.Controllers;
 [Route("[controller]")]
 public class MoviesController : ControllerBase
 {
-    private readonly IRepository<Movie> _movieRepository;
     private readonly IMediator _mediator;
 
-    public MoviesController(IRepository<Movie> movieRepository, IMediator mediator)
+    public MoviesController(IMediator mediator)
     {
-        _movieRepository = movieRepository;
         _mediator = mediator;
     }
 

@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieManagement.DataAccess.Entities;
 
 namespace MovieManagement.DataAccess;
