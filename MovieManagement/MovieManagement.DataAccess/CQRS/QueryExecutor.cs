@@ -11,8 +11,8 @@ public class QueryExecutor : IQueryExecutor
         _context = context;
     }
 
-    public async Task<TResult> Execute<TResult>(QueryBase<TResult> query)
+    public Task<TResult> Execute<TResult>(QueryBase<TResult> query)
     {
-        return await query.Execute(_context);
+        return query.Execute(_context);
     }
 }

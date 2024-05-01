@@ -14,6 +14,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddAutoMapper(typeof(MoviesProfile).Assembly);
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
+builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -2,7 +2,6 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
-using MovieManagement.DataAccess;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Queries;
 
