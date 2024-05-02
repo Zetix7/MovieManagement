@@ -20,7 +20,7 @@ public class GetMoviesHandler : IRequestHandler<GetMoviesRequest, GetMoviesRespo
 
     public async Task<GetMoviesResponse> Handle(GetMoviesRequest request, CancellationToken cancellationToken)
     {
-        var query = new GetMoviesQuery();
+        var query = new GetMoviesQuery { Title = request.Title };
         var movies = await _queryExecutor.Execute(query);
         var mappedMovies = _mapper.Map<List<Movie>>(movies);
 
