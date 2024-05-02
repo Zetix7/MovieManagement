@@ -47,4 +47,13 @@ public class ActorsController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpDelete]
+    [Route("{actorId}")]
+    public async Task<IActionResult> RemoveActorById([FromRoute] int actorId)
+    {
+        var request = new RemoveActorByIdRequest { Id = actorId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
