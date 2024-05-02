@@ -39,4 +39,12 @@ public class ActorsController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpPut]
+    [Route("")]
+    public async Task<IActionResult> UpdateActorById([FromBody] UpdateActorByIdRequest request)
+    {
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
