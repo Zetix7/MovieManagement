@@ -47,4 +47,13 @@ public class MoviesController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpDelete]
+    [Route("{movieId}")]
+    public async Task<IActionResult> RemoveMovieById([FromRoute] int movieId)
+    {
+        var request = new RemoveMovieByIdRequest() { Id = movieId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
