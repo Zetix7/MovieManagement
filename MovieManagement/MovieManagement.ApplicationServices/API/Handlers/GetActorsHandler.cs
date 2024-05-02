@@ -20,7 +20,7 @@ public class GetActorsHandler : IRequestHandler<GetActorsRequest, GetActorsRespo
 
     public async Task<GetActorsResponse> Handle(GetActorsRequest request, CancellationToken cancellationToken)
     {
-        var query = new GetActorsQuery();
+        var query = new GetActorsQuery { LastName = request.LastName };
         var actors = await _queryExecutor.Execute(query);
         var mappedActors = _mapper.Map<List<Actor>>(actors);
 
