@@ -8,6 +8,13 @@ public class MoviesProfile : Profile
 {
     public MoviesProfile()
     {
+        CreateMap<UpdateMovieByIdRequest, DataAccess.Entities.Movie>()
+            .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
+            .ForMember(x => x.Title, y => y.MapFrom(z => z.Title))
+            .ForMember(x => x.Year, y => y.MapFrom(z => z.Year))
+            .ForMember(x => x.Universe, y => y.MapFrom(z => z.Universe))
+            .ForMember(x => x.BoxOffice, y => y.MapFrom(z => z.BoxOffice));
+
         CreateMap<AddMovieRequest, DataAccess.Entities.Movie>()
             .ForMember(x => x.Title, y => y.MapFrom(z => z.Title))
             .ForMember(x => x.Year, y => y.MapFrom(z => z.Year))

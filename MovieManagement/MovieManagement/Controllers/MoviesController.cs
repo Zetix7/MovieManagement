@@ -39,4 +39,12 @@ public class MoviesController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpPut]
+    [Route("")]
+    public async Task<IActionResult> UpdateMovieById([FromBody] UpdateMovieByIdRequest request)
+    {
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
