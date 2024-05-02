@@ -25,7 +25,7 @@ public class MoviesController : ControllerBase
 
     [HttpGet]
     [Route("{movieId}")]
-    public async Task<IActionResult> GetMovieById([FromQuery] int movieId)
+    public async Task<IActionResult> GetMovieById([FromRoute] int movieId)
     {
         var request = new GetMovieByIdRequest() { Id = movieId };
         var response = await _mediator.Send(request);
