@@ -1,6 +1,9 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.ApplicationServices.API.Domain;
+using MovieManagement.ApplicationServices.API.Validators;
 using MovieManagement.ApplicationServices.Mappings;
 using MovieManagement.DataAccess;
 using MovieManagement.DataAccess.CQRS;
@@ -15,6 +18,7 @@ builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddAutoMapper(typeof(MoviesProfile).Assembly);
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
 builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
+builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<AddMovieRequestValidator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
