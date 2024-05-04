@@ -6,11 +6,11 @@ namespace MovieManagement.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MoviesController : ControllerBase
+public class MoviesController : ApiControllerBase
 {
     private readonly IMediator _mediator;
 
-    public MoviesController(IMediator mediator)
+    public MoviesController(IMediator mediator) : base(mediator)
     {
         _mediator = mediator;
     }
@@ -36,15 +36,7 @@ public class MoviesController : ControllerBase
     [Route("")]
     public async Task<IActionResult> AddMovie([FromBody] AddMovieRequest request)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState
-                .Where(x => x.Value!.Errors.Any())
-                .Select(x => new { property = x.Key, errors = x.Value!.Errors }));
-        }
-
-        var response = await _mediator.Send(request);
-        return Ok(response);
+        return await HandleRequest<AddMovieRequest, AddMovieResponse>(request);
     }
 
     [HttpPut]
