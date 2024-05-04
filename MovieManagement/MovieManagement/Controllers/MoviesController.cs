@@ -36,6 +36,13 @@ public class MoviesController : ControllerBase
     [Route("")]
     public async Task<IActionResult> AddMovie([FromBody] AddMovieRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState
+                .Where(x => x.Value!.Errors.Any())
+                .Select(x => new { property = x.Key, errors = x.Value!.Errors }));
+        }
+
         var response = await _mediator.Send(request);
         return Ok(response);
     }
