@@ -4,17 +4,23 @@ using MovieManagement.ApplicationServices.API.Domain;
 
 namespace MovieManagement.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class MoviesController : ApiControllerBase
 {
+    private readonly IMediator _mediator;
+
     public MoviesController(IMediator mediator) : base(mediator)
     {
+        _mediator = mediator;
     }
 
     [HttpGet]
     [Route("")]
     public async Task<IActionResult> GetAllMovies([FromQuery] GetMoviesRequest request)
     {
-        return await HandleRequest<GetMoviesRequest, GetMoviesResponse>(request);
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 
     [HttpGet]
@@ -22,7 +28,8 @@ public class MoviesController : ApiControllerBase
     public async Task<IActionResult> GetMovieById([FromRoute] int movieId)
     {
         var request = new GetMovieByIdRequest() { Id = movieId };
-        return await HandleRequest<GetMovieByIdRequest, GetMovieByIdResponse>(request);
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 
     [HttpPost]
@@ -36,7 +43,8 @@ public class MoviesController : ApiControllerBase
     [Route("")]
     public async Task<IActionResult> UpdateMovieById([FromBody] UpdateMovieByIdRequest request)
     {
-        return await HandleRequest<UpdateMovieByIdRequest, UpdateMovieByIdResponse>(request);
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 
     [HttpDelete]
@@ -44,6 +52,7 @@ public class MoviesController : ApiControllerBase
     public async Task<IActionResult> RemoveMovieById([FromRoute] int movieId)
     {
         var request = new RemoveMovieByIdRequest() { Id = movieId };
-        return await HandleRequest<RemoveMovieByIdRequest, RemoveMovieByIdResponse>(request);
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 }

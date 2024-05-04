@@ -6,8 +6,6 @@ using System.Net;
 
 namespace MovieManagement.Controllers;
 
-[ApiController]
-[Route("[controller]")]
 public abstract class ApiControllerBase : ControllerBase
 {
     private readonly IMediator _mediator;
