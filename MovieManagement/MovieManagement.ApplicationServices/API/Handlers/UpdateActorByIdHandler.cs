@@ -2,12 +2,13 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Commands;
 
 namespace MovieManagement.ApplicationServices.API.Handlers;
 
-public class UpdateActorByIdHandler : IRequestHandler<UpdateActorByIdRequest,  UpdateActorByIdResponse>
+public class UpdateActorByIdHandler : IRequestHandler<UpdateActorByIdRequest, UpdateActorByIdResponse>
 {
     private readonly IMapper _mapper;
     private readonly ICommandExecutor _commandExecutor;
@@ -23,6 +24,11 @@ public class UpdateActorByIdHandler : IRequestHandler<UpdateActorByIdRequest,  U
         var actor = _mapper.Map<DataAccess.Entities.Actor>(request);
         var command = new UpdateActorByIdCommand { Parameter = actor };
         var updatedActor = await _commandExecutor.Execute(command);
+        if (updatedActor.Id is 0)
+        {
+            return new UpdateActorByIdResponse { Error = new ErrorModel(ErrorType.NotFound) };
+        }
+
         var domainActor = _mapper.Map<Actor>(updatedActor);
         var response = new UpdateActorByIdResponse { Data = domainActor };
         return response;

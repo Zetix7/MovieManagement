@@ -11,7 +11,8 @@ public class UpdateActorByIdCommand : CommandBase<Actor, Actor>
 
         if (actor == null)
         {
-            return Parameter!;
+            Parameter!.Id = 0;
+            return Parameter;
         }
 
         actor.FirstName = Parameter!.FirstName;
