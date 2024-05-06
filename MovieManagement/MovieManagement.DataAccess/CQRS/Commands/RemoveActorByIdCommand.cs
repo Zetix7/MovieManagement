@@ -10,7 +10,8 @@ public class RemoveActorByIdCommand : CommandBase<Actor, Actor>
         var actor = await context.Actors.FirstOrDefaultAsync(x => x.Id == Parameter!.Id);
         if (actor is null)
         {
-            return Parameter!;
+            Parameter!.Id = 0;
+            return Parameter;
         }
 
         context.Actors.Remove(actor);

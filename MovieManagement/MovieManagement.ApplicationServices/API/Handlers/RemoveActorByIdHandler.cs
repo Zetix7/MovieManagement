@@ -2,6 +2,7 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Commands;
 
@@ -23,6 +24,11 @@ public class RemoveActorByIdHandler : IRequestHandler<RemoveActorByIdRequest, Re
         var entityActor = new DataAccess.Entities.Actor { Id = request.Id };
         var command = new RemoveActorByIdCommand { Parameter = entityActor };
         var removedActor = await _commandExecutor.Execute(command);
+        if (removedActor.Id is 0)
+        {
+            return new RemoveActorByIdResponse { Error = new ErrorModel(ErrorType.NotFound) };
+        }
+
         var domainActor = _mapper.Map<Actor>(removedActor);
         var response = new RemoveActorByIdResponse { Data = domainActor };
         return response;
