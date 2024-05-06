@@ -2,6 +2,7 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Queries;
 
@@ -21,14 +22,14 @@ public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovie
     public async Task<GetMovieByIdResponse> Handle(GetMovieByIdRequest request, CancellationToken cancellationToken)
     {
         var query = new GetMovieByIdQuery { Id = request.Id };
-        var movie = await _queryExecutor.Execute(query); 
-        if(movie is null)
+        var movie = await _queryExecutor.Execute(query);
+        if (movie is null)
         {
-            return new GetMovieByIdResponse();
+            return new GetMovieByIdResponse { Error = new ErrorModel(ErrorType.NotFound) };
         }
 
         var mappedMovie = _mapper.Map<Movie>(movie);
-        
+
         var response = new GetMovieByIdResponse
         {
             Data = mappedMovie,
