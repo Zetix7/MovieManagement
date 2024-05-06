@@ -2,6 +2,7 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Commands;
 
@@ -23,6 +24,11 @@ public class AddActorHandler : IRequestHandler<AddActorRequest, AddActorResponse
         var actor = _mapper.Map<DataAccess.Entities.Actor>(request);
         var command = new AddActorCommand { Parameter = actor };
         var entityActor = await _commandExecutor.Execute(command);
+        if (entityActor.Id == 0)
+        {
+            return new AddActorResponse { Error = new ErrorModel(ErrorType.ValidationError) };
+        }
+
         var domainActor = _mapper.Map<Actor>(entityActor);
         var response = new AddActorResponse { Data = domainActor };
         return response;
