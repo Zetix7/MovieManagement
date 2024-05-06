@@ -2,6 +2,7 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Queries;
 
@@ -22,6 +23,11 @@ public class GetActorsHandler : IRequestHandler<GetActorsRequest, GetActorsRespo
     {
         var query = new GetActorsQuery { LastName = request.LastName };
         var actors = await _queryExecutor.Execute(query);
+        if (actors.Count is 0)
+        {
+            return new GetActorsResponse { Error = new ErrorModel(ErrorType.NotFound) };
+        }
+
         var mappedActors = _mapper.Map<List<Actor>>(actors);
 
         var response = new GetActorsResponse
