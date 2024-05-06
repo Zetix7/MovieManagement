@@ -11,7 +11,8 @@ public class RemoveMovieByIdCommand : CommandBase<Movie, Movie>
 
         if(movie is null)
         {
-            return Parameter!;
+            Parameter!.Id = 0;
+            return Parameter;
         }
 
         context.Movies.Remove(movie!);
