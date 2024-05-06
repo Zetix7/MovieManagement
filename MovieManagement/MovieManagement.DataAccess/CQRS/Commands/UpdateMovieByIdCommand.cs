@@ -10,7 +10,8 @@ public class UpdateMovieByIdCommand : CommandBase<Movie, Movie>
         var movie = await context.Movies.FirstOrDefaultAsync(x=> x.Id == Parameter!.Id);
         if(movie is null)
         {
-            return Parameter!;
+            Parameter!.Id = 0;
+            return Parameter;
         }
 
         movie.Title = Parameter!.Title;

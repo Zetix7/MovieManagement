@@ -2,6 +2,7 @@
 using MediatR;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Commands;
 
@@ -29,6 +30,11 @@ public class UpdateMovieByIdHandler : IRequestHandler<UpdateMovieByIdRequest, Up
 
         var command = new UpdateMovieByIdCommand { Parameter = movie };
         var entityMovie = await _commandExecutor.Execute(command);
+        if (entityMovie.Id is 0)
+        {
+            return new UpdateMovieByIdResponse { Error = new ErrorModel(ErrorType.NotFound) };
+        }
+
         var domainMovie = _mapper.Map<Movie>(entityMovie);
         var response = new UpdateMovieByIdResponse { Data = domainMovie };
         return response;
