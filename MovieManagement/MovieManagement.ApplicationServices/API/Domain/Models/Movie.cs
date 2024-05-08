@@ -6,4 +6,5 @@ public class Movie
     public int Year { get; set; }
     public string? Universe { get; set; }
     public decimal BoxOffice { get; set; }
+    public List<string>? Cast { get; set; }
 }

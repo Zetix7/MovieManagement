@@ -9,6 +9,8 @@ public class GetActorsQuery : QueryBase<List<Actor>>
 
     public override async Task<List<Actor>> Execute(MovieManagementStorageContext context)
     {
-        return LastName == null ? await context.Actors.ToListAsync() : await context.Actors.Where(x=>x.LastName == LastName).ToListAsync();
+        return LastName == null
+            ? await context.Actors.Include(x => x.Movies).ToListAsync()
+            : await context.Actors.Include(x => x.Movies).Where(x => x.LastName == LastName).ToListAsync();
     }
 }

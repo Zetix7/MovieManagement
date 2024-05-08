@@ -9,7 +9,7 @@ public class GetMovieByIdQuery : QueryBase<Movie>
 
     public override async Task<Movie> Execute(MovieManagementStorageContext context)
     {
-        var movie = await context.Movies.SingleOrDefaultAsync(m=>m.Id == Id);
+        var movie = await context.Movies.Include(x=>x.Actors).SingleOrDefaultAsync(m=>m.Id == Id);
         return movie!;
     }
 }

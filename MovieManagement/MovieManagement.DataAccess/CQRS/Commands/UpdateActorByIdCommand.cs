@@ -7,7 +7,7 @@ public class UpdateActorByIdCommand : CommandBase<Actor, Actor>
 {
     public override async Task<Actor> Execute(MovieManagementStorageContext context)
     {
-        var actor = await context.Actors.FirstOrDefaultAsync(x=>x.Id == Parameter!.Id);
+        var actor = await context.Actors.Include(x => x.Movies).FirstOrDefaultAsync(x => x.Id == Parameter!.Id);
 
         if (actor == null)
         {
@@ -15,8 +15,21 @@ public class UpdateActorByIdCommand : CommandBase<Actor, Actor>
             return Parameter;
         }
 
-        actor.FirstName = Parameter!.FirstName;
-        actor.LastName = Parameter!.LastName;
+        if (Parameter!.FirstName is not null)
+        {
+            actor.FirstName = Parameter!.FirstName;
+        }
+
+        if (Parameter!.LastName is not null)
+        {
+            actor.LastName = Parameter!.LastName;
+        }
+
+        if (Parameter!.Movies is not null)
+        {
+            actor.Movies = Parameter!.Movies;
+        }
+
         context.Actors.Update(actor);
         await context.SaveChangesAsync();
         return actor;
