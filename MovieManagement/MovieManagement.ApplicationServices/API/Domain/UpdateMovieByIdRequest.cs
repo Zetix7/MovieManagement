@@ -9,4 +9,5 @@ public class UpdateMovieByIdRequest : IRequest<UpdateMovieByIdResponse>
     public int Year { get; set; }
     public string? Universe { get; set; }
     public decimal BoxOffice { get; set; }
+    public List<int>? CastIds { get; set; }
 }

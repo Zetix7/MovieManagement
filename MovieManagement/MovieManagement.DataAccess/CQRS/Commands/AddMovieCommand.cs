@@ -14,6 +14,17 @@ public class AddMovieCommand : CommandBase<Movie, Movie>
             return Parameter;
         }
 
+        if(Parameter!.Actors is not null)
+        {
+            var movieCast = Parameter.Actors.Select(x=>x.Id).ToList();
+            var cast = new List<Actor>();
+            foreach (var id in movieCast)
+            {
+                cast.Add(context.Actors.FirstOrDefault(x => x.Id == id)!);
+            }
+            Parameter!.Actors = cast;
+        }
+
         await context.Movies.AddAsync(Parameter!);
         await context.SaveChangesAsync();
         return Parameter!;
