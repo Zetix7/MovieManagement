@@ -27,7 +27,18 @@ public class UpdateActorByIdCommand : CommandBase<Actor, Actor>
 
         if (Parameter!.Movies is not null)
         {
-            actor.Movies = Parameter!.Movies;
+            var actorMovies = actor.Movies!.ToList();
+            var movies = Parameter!.Movies.Select(x => x.Id).ToList();
+            foreach (var id in movies)
+            {
+                if (actorMovies.Find(x => x.Id == id) != null)
+                {
+                    continue;
+                }
+                actorMovies.Add(context.Movies.FirstOrDefault(x => x.Id == id)!);
+            }
+
+            actor.Movies = actorMovies;
         }
 
         context.Actors.Update(actor);

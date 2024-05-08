@@ -13,6 +13,16 @@ public class AddActorCommand : CommandBase<Actor, Actor>
             Parameter!.Id = 0;
             return Parameter;
         }
+
+        var movieIds = Parameter!.Movies!.Select(x=>x.Id).ToList();
+        var movies = new List<Movie>();
+        foreach(var id in movieIds)
+        {
+            movies.Add(context.Movies.FirstOrDefault(x => x.Id == id)!);
+        }
+
+        Parameter!.Movies = movies;
+
         await context.Actors.AddAsync(Parameter!);
         await context.SaveChangesAsync();
         return Parameter!;

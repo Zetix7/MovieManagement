@@ -25,6 +25,6 @@ public class ActorsProfile : Profile
         CreateMap<DataAccess.Entities.Actor, Actor>()
             .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
             .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
-            .ForMember(x => x.MovieTitleList, y => y.MapFrom(z => z.Movies!.Select(m => m.Title)));
+            .ForMember(x => x.MovieTitleList, y => y.MapFrom(z => z.Movies!.Select(m => new string($"{m.Title} ({m.Year})"))));
     }
 }
