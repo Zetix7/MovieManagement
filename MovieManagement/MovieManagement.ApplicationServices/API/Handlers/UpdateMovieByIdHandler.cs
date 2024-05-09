@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.ApplicationServices.API.ErrorHandling;
@@ -12,15 +13,19 @@ public class UpdateMovieByIdHandler : IRequestHandler<UpdateMovieByIdRequest, Up
 {
     private readonly IMapper _mapper;
     private readonly ICommandExecutor _commandExecutor;
+    private readonly ILogger<UpdateMovieByIdHandler> _logger;
 
-    public UpdateMovieByIdHandler(IMapper mapper, ICommandExecutor commandExecutor)
+    public UpdateMovieByIdHandler(IMapper mapper, ICommandExecutor commandExecutor, ILogger<UpdateMovieByIdHandler> logger)
     {
         _mapper = mapper;
         _commandExecutor = commandExecutor;
+        _logger = logger;
+        _logger.LogInformation("We are in UpdateMovieByIdHandler class");
     }
 
     public async Task<UpdateMovieByIdResponse> Handle(UpdateMovieByIdRequest request, CancellationToken token)
     {
+        _logger.LogInformation("We are in Handle method in UpdateMovieByIdHandler class");
         var movie = _mapper.Map<DataAccess.Entities.Movie>(request);
 
         if (movie is null)

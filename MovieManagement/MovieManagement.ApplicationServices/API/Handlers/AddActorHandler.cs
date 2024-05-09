@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.ApplicationServices.API.ErrorHandling;
@@ -12,15 +13,19 @@ public class AddActorHandler : IRequestHandler<AddActorRequest, AddActorResponse
 {
     private readonly IMapper _mapper;
     private readonly ICommandExecutor _commandExecutor;
+    private readonly ILogger<AddActorHandler> _logger;
 
-    public AddActorHandler(IMapper mapper, ICommandExecutor commandExecutor)
+    public AddActorHandler(IMapper mapper, ICommandExecutor commandExecutor, ILogger<AddActorHandler> logger)
     {
         _mapper = mapper;
         _commandExecutor = commandExecutor;
+        _logger = logger;
+        _logger.LogInformation("We are in AddActorHandler class");
     }
 
     public async Task<AddActorResponse> Handle(AddActorRequest request, CancellationToken token)
     {
+        _logger.LogInformation("We are in Handle method in AddActorHandler class");
         var actor = _mapper.Map<DataAccess.Entities.Actor>(request);
         var command = new AddActorCommand { Parameter = actor };
         var entityActor = await _commandExecutor.Execute(command);

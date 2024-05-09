@@ -11,17 +11,21 @@ namespace MovieManagement.Controllers;
 public abstract class ApiControllerBase : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<ApiControllerBase> _logger;
 
-    public ApiControllerBase(IMediator mediator)
+    public ApiControllerBase(IMediator mediator, ILogger<ApiControllerBase> logger)
     {
         _mediator = mediator;
+        _logger = logger;
+        _logger.LogInformation("We are in ApiControllerBase class");
     }
 
     protected async Task<IActionResult> HandleRequest<TRequest, TResponse>(TRequest request)
         where TRequest : IRequest<TResponse>
         where TResponse : ErrorResponseBase
     {
-        if(!ModelState.IsValid)
+        _logger.LogInformation("We are in HandleRequest method in ApiControllerBase class");
+        if (!ModelState.IsValid)
         {
             return BadRequest(ModelState
                 .Where(x => x.Value!.Errors.Any())
@@ -39,12 +43,14 @@ public abstract class ApiControllerBase : ControllerBase
 
     private IActionResult ErrorResponse(ErrorModel errorModel)
     {
+        _logger.LogInformation("We are in ErrorResponse method in ApiControllerBase class");
         var httpCode = GetHttpStatusCode(errorModel.Error);
         return StatusCode((int)httpCode, errorModel);
     }
 
     private HttpStatusCode GetHttpStatusCode(string errorType)
     {
+        _logger.LogInformation("We are in GetHttpStatusCode method in ApiControllerBase class");
         return errorType switch
         {
             ErrorType.InternalServerError => HttpStatusCode.InternalServerError,

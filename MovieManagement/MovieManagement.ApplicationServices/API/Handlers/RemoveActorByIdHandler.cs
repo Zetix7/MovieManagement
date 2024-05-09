@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.ApplicationServices.API.ErrorHandling;
@@ -12,15 +13,19 @@ public class RemoveActorByIdHandler : IRequestHandler<RemoveActorByIdRequest, Re
 {
     private readonly IMapper _mapper;
     private readonly ICommandExecutor _commandExecutor;
+    private readonly ILogger<RemoveActorByIdCommand> _logger;
 
-    public RemoveActorByIdHandler(IMapper mapper, ICommandExecutor commandExecutor)
+    public RemoveActorByIdHandler(IMapper mapper, ICommandExecutor commandExecutor, ILogger<RemoveActorByIdCommand> logger)
     {
         _mapper = mapper;
         _commandExecutor = commandExecutor;
+        _logger = logger;
+        _logger.LogInformation("We are in RemoveActorByIdHandler class");
     }
 
     public async Task<RemoveActorByIdResponse> Handle(RemoveActorByIdRequest request, CancellationToken token)
     {
+        _logger.LogInformation("We are in Handle method in RemoveActorByIdHandler class");
         var entityActor = new DataAccess.Entities.Actor { Id = request.Id };
         var command = new RemoveActorByIdCommand { Parameter = entityActor };
         var removedActor = await _commandExecutor.Execute(command);

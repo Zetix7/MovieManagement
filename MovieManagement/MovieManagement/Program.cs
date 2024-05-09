@@ -8,6 +8,7 @@ using MovieManagement.ApplicationServices.API.Validators;
 using MovieManagement.ApplicationServices.Mappings;
 using MovieManagement.DataAccess;
 using MovieManagement.DataAccess.CQRS;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
 builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
 builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<AddMovieRequestValidator>();
 builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
+builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
+builder.WebHost.UseNLog();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.ApplicationServices.API.ErrorHandling;
@@ -12,15 +13,19 @@ public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovie
 {
     private readonly IMapper _mapper;
     private readonly IQueryExecutor _queryExecutor;
+    private readonly ILogger<GetMovieByIdHandler> _logger;
 
-    public GetMovieByIdHandler(IMapper mapper, IQueryExecutor queryExecutor)
+    public GetMovieByIdHandler(IMapper mapper, IQueryExecutor queryExecutor, ILogger<GetMovieByIdHandler> logger)
     {
         _mapper = mapper;
         _queryExecutor = queryExecutor;
+        _logger = logger;
+        _logger.LogInformation("We are in GetMovieByIdHandler class");
     }
 
     public async Task<GetMovieByIdResponse> Handle(GetMovieByIdRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("We are in Handle method in GetMovieByIdHandler class");
         var query = new GetMovieByIdQuery { Id = request.Id };
         var movie = await _queryExecutor.Execute(query);
         if (movie is null)
