@@ -40,7 +40,7 @@ public class UpdateMovieByIdCommand : CommandBase<Movie, Movie>
             var castIds = Parameter.Actors.Select(x => x.Id).ToList();
             foreach (var id in castIds)
             {
-                if (movieCast.Find(x => x.Id == id) != null)
+                if (movieCast.Find(x => x.Id == id) != null || context.Actors.FirstOrDefault(x => x.Id == id) is null)
                 {
                     continue;
                 }

@@ -31,7 +31,7 @@ public class UpdateActorByIdCommand : CommandBase<Actor, Actor>
             var movies = Parameter!.Movies.Select(x => x.Id).ToList();
             foreach (var id in movies)
             {
-                if (actorMovies.Find(x => x.Id == id) != null)
+                if (actorMovies.Find(x => x.Id == id) != null || context.Movies.FirstOrDefault(x=>x.Id == id) is null)
                 {
                     continue;
                 }

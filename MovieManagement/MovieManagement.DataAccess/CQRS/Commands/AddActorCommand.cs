@@ -7,17 +7,21 @@ public class AddActorCommand : CommandBase<Actor, Actor>
 {
     public override async Task<Actor> Execute(MovieManagementStorageContext context)
     {
-        var actor = await context.Actors.FirstOrDefaultAsync(x=>x.FirstName == Parameter!.FirstName && x.LastName == Parameter!.LastName);
+        var actor = await context.Actors.FirstOrDefaultAsync(x => x.FirstName == Parameter!.FirstName && x.LastName == Parameter!.LastName);
         if (actor is not null)
         {
             Parameter!.Id = 0;
             return Parameter;
         }
 
-        var movieIds = Parameter!.Movies!.Select(x=>x.Id).ToList();
+        var movieIds = Parameter!.Movies!.Select(x => x.Id).ToList();
         var movies = new List<Movie>();
-        foreach(var id in movieIds)
+        foreach (var id in movieIds)
         {
+            if (context.Movies.FirstOrDefault(x => x.Id == id) is null)
+            {
+                continue;
+            }
             movies.Add(context.Movies.FirstOrDefault(x => x.Id == id)!);
         }
 

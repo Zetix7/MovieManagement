@@ -20,6 +20,10 @@ public class AddMovieCommand : CommandBase<Movie, Movie>
             var cast = new List<Actor>();
             foreach (var id in movieCast)
             {
+                if (context.Actors.FirstOrDefault(x => x.Id == id) is null)
+                {
+                    continue;
+                }
                 cast.Add(context.Actors.FirstOrDefault(x => x.Id == id)!);
             }
             Parameter!.Actors = cast;
