@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Validators;
+using MovieManagement.ApplicationServices.Components.OpenWeather;
 using MovieManagement.ApplicationServices.Mappings;
 using MovieManagement.DataAccess;
 using MovieManagement.DataAccess.CQRS;
@@ -24,6 +25,7 @@ builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyCo
 builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 builder.Logging.ClearProviders().SetMinimumLevel(LogLevel.Trace);
 builder.WebHost.UseNLog();
+builder.Services.AddTransient<IOpenWeatherConnector, OpenWeatherConnector>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
