@@ -22,4 +22,12 @@ public class UsersController : ApiControllerBase
     {
         return await HandleRequest<GetUsersRequest, GetUsersResponse>(request);
     }
+
+    [AllowAnonymous]
+    [HttpPost]
+    [Route("")]
+    public async Task<IActionResult> AddUser([FromBody] AddUserRequest request)
+    {
+        return await HandleRequest<AddUserRequest, AddUserResponse>(request);
+    }
 }
