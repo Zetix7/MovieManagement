@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieManagement.ApplicationServices.API.Domain;
 
 namespace MovieManagement.Controllers;
 
+[Authorize]
 public class UsersController : ApiControllerBase
 {
     private readonly ILogger<UsersController> _logger;
