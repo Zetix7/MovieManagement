@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieManagement.ApplicationServices.API.Domain;
 
 namespace MovieManagement.Controllers;
 
+[AllowAnonymous]
 public class OpenWeathersController : ApiControllerBase
 {
     private readonly ILogger<OpenWeathersController> _logger;

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.ErrorHandling;
@@ -6,6 +7,7 @@ using System.Net;
 
 namespace MovieManagement.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public abstract class ApiControllerBase : ControllerBase
