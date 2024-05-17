@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement", "MovieMan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement.DataAccess", "MovieManagement.DataAccess\MovieManagement.DataAccess.csproj", "{0852F859-E037-4011-9C09-2DCDCCFB916A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManagement.ApplicationServices", "MovieManagement.ApplicationServices\MovieManagement.ApplicationServices.csproj", "{33BA804C-5BE5-4591-9D75-BAC5E6FB04D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement.ApplicationServices", "MovieManagement.ApplicationServices\MovieManagement.ApplicationServices.csproj", "{33BA804C-5BE5-4591-9D75-BAC5E6FB04D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{18EEF9D2-8043-432D-9DB8-51814D0D51CB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

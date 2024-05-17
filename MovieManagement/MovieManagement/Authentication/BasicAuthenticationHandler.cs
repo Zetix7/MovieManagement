@@ -29,7 +29,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         var endpoint = Context.GetEndpoint();
-        if(endpoint?.Metadata.GetMetadata<IAllowAnonymous>() != null)
+        if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null)
         {
             return AuthenticateResult.NoResult();
         }
@@ -39,7 +39,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             return AuthenticateResult.Fail("Missing Authorization Header");
         }
 
-        User user = null;
+        User user = null!;
 
         try
         {
@@ -49,17 +49,17 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             var username = credentials[0];
             var password = credentials[1];
 
-            var query = new GetUSerQuery { Username = username };
+            var query = new GetUserQuery { Username = username };
             user = await _queryExecutor.Execute(query);
 
-            if(user is null || user.Password != password)
+            if (user is null || user.Password != password)
             {
-                return AuthenticateResult.Fail("Missing Authorization Header");
+                return AuthenticateResult.Fail("Wrong Username or Password");
             }
         }
         catch
         {
-            return AuthenticateResult.Fail("Missing Authorization Header");
+            return AuthenticateResult.Fail("Wrong Username or Password");
         }
 
         var claims = new[]
