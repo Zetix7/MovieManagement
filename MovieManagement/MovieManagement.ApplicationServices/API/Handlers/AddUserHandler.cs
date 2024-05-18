@@ -25,6 +25,8 @@ public class AddUserHandler : IRequestHandler<AddUserRequest, AddUserResponse>
     public async Task<AddUserResponse> Handle(AddUserRequest request, CancellationToken token)
     {
         var entityUser = _mapper.Map<DataAccess.Entities.User>(request);
+        entityUser.AccessLevel = DataAccess.Entities.User.Role.UserService;
+        entityUser.IsActive = true;
         var command = new AddUserCommand { Parameter = entityUser };
         var addedUser = await _commandExecutor.Execute(command);
         if (addedUser.Id is 0)

@@ -26,6 +26,12 @@ public class AddMovieHandler : IRequestHandler<AddMovieRequest, AddMovieResponse
     public async Task<AddMovieResponse> Handle(AddMovieRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in AddMovieHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new AddMovieResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+
         var movie = _mapper.Map<DataAccess.Entities.Movie>(request);
         var command = new AddMovieCommand { Parameter = movie };
         var entityMovie = await _commandExecutor.Execute(command);

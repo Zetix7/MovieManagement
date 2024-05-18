@@ -2,6 +2,6 @@
 
 namespace MovieManagement.ApplicationServices.API.Domain;
 
-public class GetUsersRequest : RequestBase, IRequest<GetUsersResponse>
+public class GetMeRequest : RequestBase, IRequest<GetMeResponse>
 {
 }

@@ -19,9 +19,8 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
         UrlEncoder encoder,
-        ISystemClock clock,
         IQueryExecutor queryExecutor)
-        : base(options, logger, encoder, clock)
+        : base(options, logger, encoder)
     {
         _queryExecutor = queryExecutor;
     }
@@ -59,13 +58,15 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         }
         catch
         {
-            return AuthenticateResult.Fail("Wrong Username or Password");
+            return AuthenticateResult.Fail("Missing Authorization Header");
         }
 
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Login!)
+            new Claim(ClaimTypes.Name, user.Login!),
+            new Claim(ClaimTypes.Role, user.AccessLevel.ToString()!),
+            new Claim(ClaimTypes.UserData, user.IsActive.ToString())
         };
 
         var identity = new ClaimsIdentity(claims, Scheme.Name);

@@ -26,6 +26,12 @@ public class AddActorHandler : IRequestHandler<AddActorRequest, AddActorResponse
     public async Task<AddActorResponse> Handle(AddActorRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in AddActorHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new AddActorResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+
         var actor = _mapper.Map<DataAccess.Entities.Actor>(request);
         var command = new AddActorCommand { Parameter = actor };
         var entityActor = await _commandExecutor.Execute(command);

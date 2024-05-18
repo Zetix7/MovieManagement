@@ -26,6 +26,12 @@ public class RemoveActorByIdHandler : IRequestHandler<RemoveActorByIdRequest, Re
     public async Task<RemoveActorByIdResponse> Handle(RemoveActorByIdRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in RemoveActorByIdHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new RemoveActorByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+        
         var entityActor = new DataAccess.Entities.Actor { Id = request.Id };
         var command = new RemoveActorByIdCommand { Parameter = entityActor };
         var removedActor = await _commandExecutor.Execute(command);

@@ -26,6 +26,12 @@ public class UpdateMovieByIdHandler : IRequestHandler<UpdateMovieByIdRequest, Up
     public async Task<UpdateMovieByIdResponse> Handle(UpdateMovieByIdRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in UpdateMovieByIdHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new UpdateMovieByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+        
         var movie = _mapper.Map<DataAccess.Entities.Movie>(request);
 
         if (movie is null)

@@ -2,7 +2,7 @@
 
 namespace MovieManagement.ApplicationServices.API.Domain;
 
-public class AddMovieRequest : IRequest<AddMovieResponse>
+public class AddMovieRequest : RequestBase, IRequest<AddMovieResponse>
 {
     public string? Title { get; set; }
     public int Year { get; set; }

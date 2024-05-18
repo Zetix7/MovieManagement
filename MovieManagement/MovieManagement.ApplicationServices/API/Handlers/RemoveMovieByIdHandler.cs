@@ -26,6 +26,12 @@ public class RemoveMovieByIdHandler : IRequestHandler<RemoveMovieByIdRequest, Re
     public async Task<RemoveMovieByIdResponse> Handle(RemoveMovieByIdRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in RemoveMovieByIdHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new RemoveMovieByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+        
         var entityMovie = new DataAccess.Entities.Movie { Id = request.Id };
         var command = new RemoveMovieByIdCommand { Parameter = entityMovie };
         var removedMovie = await _commandExecutor.Execute(command);

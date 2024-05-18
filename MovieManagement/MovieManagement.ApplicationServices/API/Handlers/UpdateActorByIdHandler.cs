@@ -26,6 +26,12 @@ public class UpdateActorByIdHandler : IRequestHandler<UpdateActorByIdRequest, Up
     public async Task<UpdateActorByIdResponse> Handle(UpdateActorByIdRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in UpdateActorByIdHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new UpdateActorByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+        
         var actor = _mapper.Map<DataAccess.Entities.Actor>(request);
         var command = new UpdateActorByIdCommand { Parameter = actor };
         var updatedActor = await _commandExecutor.Execute(command);

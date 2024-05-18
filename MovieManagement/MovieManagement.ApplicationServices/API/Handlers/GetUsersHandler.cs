@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Domain.Models;
+using MovieManagement.ApplicationServices.API.ErrorHandling;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Queries;
 
@@ -25,6 +26,11 @@ public class GetUsersHandler : IRequestHandler<GetUsersRequest, GetUsersResponse
 
     public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken token)
     {
+        if (!request.IsActiveAuthentication)
+        {
+            return new GetUsersResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+
         var query = new GetUsersQuery();
         var users = await _queryExecutor.Execute(query);
         var domainUsers = _mapper.Map<List<User>>(users);

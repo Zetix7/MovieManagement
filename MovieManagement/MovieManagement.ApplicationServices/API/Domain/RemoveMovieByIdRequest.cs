@@ -2,7 +2,7 @@
 
 namespace MovieManagement.ApplicationServices.API.Domain;
 
-public class RemoveMovieByIdRequest : IRequest<RemoveMovieByIdResponse>
+public class RemoveMovieByIdRequest : RequestBase, IRequest<RemoveMovieByIdResponse>
 {
     public int Id { get; set; }
 }
