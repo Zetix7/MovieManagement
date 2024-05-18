@@ -31,6 +31,15 @@ public class UsersController : ApiControllerBase
         return await HandleRequest<GetMeRequest, GetMeResponse>(request);
     }
 
+    [HttpGet]
+    [Route("{login}")]
+    public async Task<IActionResult> GetUserByLogin([FromRoute] string login, GetUserByLoginRequest request)
+    {
+        _logger.LogInformation("We are in GetUserByLogin method - EndPoint GET");
+        request.Login = login;
+        return await HandleRequest<GetUserByLoginRequest, GetUserByLoginResponse>(request);
+    }
+
     [AllowAnonymous]
     [HttpPost]
     [Route("")]

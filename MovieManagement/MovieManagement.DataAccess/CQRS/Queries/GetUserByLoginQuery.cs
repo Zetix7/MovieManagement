@@ -3,7 +3,7 @@ using MovieManagement.DataAccess.Entities;
 
 namespace MovieManagement.DataAccess.CQRS.Queries;
 
-public class GetUserQuery : QueryBase<User>
+public class GetUserByLoginQuery : QueryBase<User>
 {
     public string? Login { get; set; }
 

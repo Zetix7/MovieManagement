@@ -48,7 +48,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             var username = credentials[0];
             var password = credentials[1];
 
-            var query = new GetUserQuery { Username = username };
+            var query = new GetUserQuery { Login = username };
             user = await _queryExecutor.Execute(query);
 
             if (user is null || user.Password != password)
