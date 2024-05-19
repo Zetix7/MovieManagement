@@ -45,7 +45,15 @@ public class UsersController : ApiControllerBase
     [Route("")]
     public async Task<IActionResult> AddUser([FromBody] AddUserRequest request)
     {
-        _logger.LogInformation("We are in AddUsers method - EndPoint POST");
+        _logger.LogInformation("We are in AddUser method - EndPoint POST");
         return await HandleRequest<AddUserRequest, AddUserResponse>(request);
+    }
+
+    [HttpPut]
+    [Route("")]
+    public async Task<IActionResult> UpdateUserByLogin([FromBody] UpdateUserByLoginRequest request)
+    {
+        _logger.LogInformation("We are in UpdateUserByLogin method - EndPoint POST");
+        return await HandleRequest<UpdateUserByLoginRequest, UpdateUserByLoginResponse>(request);
     }
 }

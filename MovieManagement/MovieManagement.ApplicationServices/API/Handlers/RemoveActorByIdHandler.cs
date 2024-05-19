@@ -27,7 +27,8 @@ public class RemoveActorByIdHandler : IRequestHandler<RemoveActorByIdRequest, Re
     {
         _logger.LogInformation("We are in Handle method in RemoveActorByIdHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
             return new RemoveActorByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

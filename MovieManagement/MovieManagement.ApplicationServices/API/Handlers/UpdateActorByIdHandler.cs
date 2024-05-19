@@ -27,7 +27,8 @@ public class UpdateActorByIdHandler : IRequestHandler<UpdateActorByIdRequest, Up
     {
         _logger.LogInformation("We are in Handle method in UpdateActorByIdHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
             return new UpdateActorByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

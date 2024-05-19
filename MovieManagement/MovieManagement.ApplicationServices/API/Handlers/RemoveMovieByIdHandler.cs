@@ -27,7 +27,8 @@ public class RemoveMovieByIdHandler : IRequestHandler<RemoveMovieByIdRequest, Re
     {
         _logger.LogInformation("We are in Handle method in RemoveMovieByIdHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
             return new RemoveMovieByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

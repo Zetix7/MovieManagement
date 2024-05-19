@@ -27,7 +27,8 @@ public class UpdateMovieByIdHandler : IRequestHandler<UpdateMovieByIdRequest, Up
     {
         _logger.LogInformation("We are in Handle method in UpdateMovieByIdHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
             return new UpdateMovieByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }
