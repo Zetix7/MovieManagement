@@ -3,11 +3,11 @@ using MovieManagement.DataAccess.Entities;
 
 namespace MovieManagement.DataAccess.CQRS.Commands;
 
-public class UpdateUserByLoginCommand : CommandBase<User, User>
+public class UpdateUserByUsernameCommand : CommandBase<User, User>
 {
     public override async Task<User> Execute(MovieManagementStorageContext context)
     {
-        var user = await context.Users.FirstOrDefaultAsync(x => x.Login == Parameter!.Login);
+        var user = await context.Users.FirstOrDefaultAsync(x => x.Username == Parameter!.Username);
         if (user == null)
         {
             Parameter!.Id = 0;

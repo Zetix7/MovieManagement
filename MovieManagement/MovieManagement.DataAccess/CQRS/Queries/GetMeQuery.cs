@@ -9,6 +9,6 @@ public class GetMeQuery : QueryBase<User>
     
     public override async Task<User> Execute(MovieManagementStorageContext context)
     {
-        return await context.Users.FirstOrDefaultAsync(x => x.Login == Login)!;
+        return await context.Users.FirstOrDefaultAsync(x => x.Username == Login)!;
     }
 }

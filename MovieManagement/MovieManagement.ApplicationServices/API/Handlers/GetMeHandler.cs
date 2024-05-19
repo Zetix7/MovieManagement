@@ -31,7 +31,7 @@ public class GetMeHandler : IRequestHandler<GetMeRequest, GetMeResponse>
             return new GetMeResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }
 
-        var query = new GetMeQuery { Login = request.LoginAuthentication };
+        var query = new GetMeQuery { Login = request.UsernameAuthentication };
         var user = await _queryExecutor.Execute(query);
         if (user is null)
         {

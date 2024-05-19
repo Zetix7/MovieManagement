@@ -51,9 +51,9 @@ public class UsersController : ApiControllerBase
 
     [HttpPut]
     [Route("")]
-    public async Task<IActionResult> UpdateUserByLogin([FromBody] UpdateUserByLoginRequest request)
+    public async Task<IActionResult> UpdateUserByLogin([FromBody] UpdateUserByUsernameRequest request)
     {
         _logger.LogInformation("We are in UpdateUserByLogin method - EndPoint POST");
-        return await HandleRequest<UpdateUserByLoginRequest, UpdateUserByLoginResponse>(request);
+        return await HandleRequest<UpdateUserByUsernameRequest, UpdateUserByUsernameResponse>(request);
     }
 }

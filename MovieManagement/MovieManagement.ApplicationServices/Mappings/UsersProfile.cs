@@ -11,13 +11,13 @@ public class UsersProfile : Profile
         CreateMap<AddUserRequest, DataAccess.Entities.User>()
             .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
             .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
-            .ForMember(x => x.Login, y => y.MapFrom(z => z.Username))
+            .ForMember(x => x.Username, y => y.MapFrom(z => z.Username))
             .ForMember(x => x.Password, y => y.MapFrom(z => z.Password));
 
-        CreateMap<UpdateUserByLoginRequest,  DataAccess.Entities.User>()
+        CreateMap<UpdateUserByUsernameRequest,  DataAccess.Entities.User>()
             .ForMember(x=>x.FirstName, y=>y.MapFrom(z=>z.FirstName))
             .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
-            .ForMember(x => x.Login, y => y.MapFrom(z => z.Login))
+            .ForMember(x => x.Username, y => y.MapFrom(z => z.Username))
             .ForMember(x => x.Password, y => y.MapFrom(z => z.Password))
             .ForMember(x => x.AccessLevel, y => y.MapFrom(z => z.AccessLevel))
             .ForMember(x => x.IsActive, y => y.MapFrom(z => z.IsActive));
@@ -25,7 +25,7 @@ public class UsersProfile : Profile
         CreateMap<DataAccess.Entities.User, User>()
             .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
             .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
-            .ForMember(x => x.Login, y => y.MapFrom(z => z.Login))
+            .ForMember(x => x.Username, y => y.MapFrom(z => z.Username))
             .ForMember(x => x.AccessLevel, y => y.MapFrom(z => z.AccessLevel))
             .ForMember(x => x.IsActive, y => y.MapFrom(z => z.IsActive));
     }

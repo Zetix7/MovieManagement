@@ -64,7 +64,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Login!),
+            new Claim(ClaimTypes.Name, user.Username!),
             new Claim(ClaimTypes.Role, user.AccessLevel.ToString()!),
             new Claim(ClaimTypes.UserData, user.IsActive.ToString())
         };

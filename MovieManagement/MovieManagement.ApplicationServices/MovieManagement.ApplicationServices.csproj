@@ -22,4 +22,8 @@
     <ProjectReference Include="..\MovieManagement.DataAccess\MovieManagement.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\HashedPassword\" />
+  </ItemGroup>
+
 </Project>

@@ -37,7 +37,7 @@ public abstract class ApiControllerBase : ControllerBase
 
         if (User.Claims.FirstOrDefault() != null)
         {
-            request.LoginAuthentication = User.FindFirstValue(ClaimTypes.Name);
+            request.UsernameAuthentication = User.FindFirstValue(ClaimTypes.Name);
             request.AccessLevelAuthentication = User.FindFirstValue(ClaimTypes.Role);
             request.IsActiveAuthentication = bool.Parse(User.FindFirstValue(ClaimTypes.UserData)!);
         }
