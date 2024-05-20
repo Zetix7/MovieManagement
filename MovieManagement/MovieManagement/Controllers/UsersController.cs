@@ -53,7 +53,15 @@ public class UsersController : ApiControllerBase
     [Route("")]
     public async Task<IActionResult> UpdateUserByLogin([FromBody] UpdateUserByUsernameRequest request)
     {
-        _logger.LogInformation("We are in UpdateUserByLogin method - EndPoint POST");
+        _logger.LogInformation("We are in UpdateUserByLogin method - EndPoint PUT");
         return await HandleRequest<UpdateUserByUsernameRequest, UpdateUserByUsernameResponse>(request);
+    }
+
+    [HttpPut]
+    [Route("new-password")]
+    public async Task<IActionResult> UpdateMyPassword([FromBody] UpdateMyPasswordRequest request)
+    {
+        _logger.LogInformation("We are in UpdateMyPassword method - EndPoint PUT");
+        return await HandleRequest<UpdateMyPasswordRequest, UpdateMyPasswordResponse>(request);
     }
 }
