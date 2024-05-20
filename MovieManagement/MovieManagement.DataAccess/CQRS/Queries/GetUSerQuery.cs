@@ -5,11 +5,11 @@ namespace MovieManagement.DataAccess.CQRS.Queries;
 
 public class GetUserQuery : QueryBase<User>
 {
-    public string? Login { get; set; }
+    public string? Username { get; set; }
 
     public override async Task<User> Execute(MovieManagementStorageContext context)
     {
-        var user = await context.Users.FirstOrDefaultAsync(x => x.Username == Login);
+        var user = await context.Users.FirstOrDefaultAsync(x => x.Username == Username);
         return user!;
     }
 }

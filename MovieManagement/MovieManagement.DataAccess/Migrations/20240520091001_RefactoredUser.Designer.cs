@@ -11,8 +11,8 @@ using MovieManagement.DataAccess;
 namespace MovieManagement.DataAccess.Migrations
 {
     [DbContext(typeof(MovieManagementStorageContext))]
-    [Migration("20240517085913_RefactoredUserEntity")]
-    partial class RefactoredUserEntity
+    [Migration("20240520091001_RefactoredUser")]
+    partial class RefactoredUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,15 +110,15 @@ namespace MovieManagement.DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 

@@ -5,14 +5,21 @@
 namespace MovieManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class RefactoredUserEntity : Migration
+    public partial class RefactoredUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<string>(
                 name: "Username",
-                table: "Users");
+                table: "Users",
+                type: "nvarchar(15)",
+                maxLength: 15,
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Password",
@@ -58,14 +65,6 @@ namespace MovieManagement.DataAccess.Migrations
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Login",
-                table: "Users",
-                type: "nvarchar(15)",
-                maxLength: 15,
-                nullable: false,
-                defaultValue: "");
         }
 
         /// <inheritdoc />
@@ -79,9 +78,14 @@ namespace MovieManagement.DataAccess.Migrations
                 name: "IsActive",
                 table: "Users");
 
-            migrationBuilder.DropColumn(
-                name: "Login",
-                table: "Users");
+            migrationBuilder.AlterColumn<string>(
+                name: "Username",
+                table: "Users",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(15)",
+                oldMaxLength: 15);
 
             migrationBuilder.AlterColumn<string>(
                 name: "Password",
@@ -111,12 +115,6 @@ namespace MovieManagement.DataAccess.Migrations
                 oldType: "nvarchar(20)",
                 oldMaxLength: 20,
                 oldNullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Username",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
         }
     }
 }

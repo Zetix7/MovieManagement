@@ -26,7 +26,8 @@ public class GetUsersHandler : IRequestHandler<GetUsersRequest, GetUsersResponse
 
     public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken token)
     {
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
             return new GetUsersResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

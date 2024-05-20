@@ -26,6 +26,12 @@ public class GetActorByIdHandler : IRequestHandler<GetActorByIdRequest, GetActor
     public async Task<GetActorByIdResponse> Handle(GetActorByIdRequest request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("We are in Handle method in GetActorByIdHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new GetActorByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+
         var query = new GetActorByIdQuery { Id = request.Id };
         var actor = await _queryExecutor.Execute(query);
         if (actor is null)

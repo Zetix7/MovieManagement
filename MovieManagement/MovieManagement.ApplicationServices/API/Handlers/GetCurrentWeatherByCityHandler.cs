@@ -21,6 +21,12 @@ public class GetCurrentWeatherByCityHandler : IRequestHandler<GetCurrentWeatherB
     public async Task<GetCurrentWeatherByCityResponse> Handle(GetCurrentWeatherByCityRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in GetCurrentWeatherByCityHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new GetCurrentWeatherByCityResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+
         var city = request.City;
         var weather = await _openWeatherConnector.Connect(city!);
         if (weather is null)

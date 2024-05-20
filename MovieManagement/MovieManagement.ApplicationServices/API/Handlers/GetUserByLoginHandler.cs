@@ -27,7 +27,8 @@ public class GetUserByLoginHandler : IRequestHandler<GetUserByLoginRequest, GetU
     {
         _logger.LogInformation("We are in Handle method in GetUserByLoginHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
             return new GetUserByLoginResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

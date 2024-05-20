@@ -26,6 +26,12 @@ public class GetMovieByIdHandler : IRequestHandler<GetMovieByIdRequest, GetMovie
     public async Task<GetMovieByIdResponse> Handle(GetMovieByIdRequest request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("We are in Handle method in GetMovieByIdHandler class");
+
+        if (!request.IsActiveAuthentication)
+        {
+            return new GetMovieByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+        }
+
         var query = new GetMovieByIdQuery { Id = request.Id };
         var movie = await _queryExecutor.Execute(query);
         if (movie is null)
