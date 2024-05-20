@@ -24,12 +24,7 @@ public class UpdateUserByUsernameCommand : CommandBase<User, User>
             user.LastName = Parameter.LastName;
         }
 
-        if (Parameter!.Password != null)
-        {
-            user.Password = Parameter.Password;
-        }
-
-        if (Parameter!.AccessLevel != user.AccessLevel)
+        if (Parameter!.AccessLevel != User.Role.None)
         {
             user.AccessLevel = Parameter.AccessLevel;
         }

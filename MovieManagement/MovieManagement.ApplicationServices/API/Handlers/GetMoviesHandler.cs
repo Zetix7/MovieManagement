@@ -27,7 +27,8 @@ public class GetMoviesHandler : IRequestHandler<GetMoviesRequest, GetMoviesRespo
     {
         _logger.LogInformation("We are in handle method in GetMoviesHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication == DataAccess.Entities.User.Role.None.ToString())
         {
             return new GetMoviesResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

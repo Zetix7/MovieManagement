@@ -6,8 +6,9 @@ public class User : EntityBase
 {
     public enum Role
     {
-        UserService = 0,
-        AdministratorService = 1,
+        None = 0,
+        UserService = 1,
+        AdministratorService = 2,
     }
 
     [StringLength(20, MinimumLength = 1)]
@@ -21,7 +22,7 @@ public class User : EntityBase
     public string? Username { get; set; }
 
     [Required]
-    [StringLength(30, MinimumLength = 10)]
+    [StringLength(69)]
     public string? Password { get; set; }
 
     [Required]

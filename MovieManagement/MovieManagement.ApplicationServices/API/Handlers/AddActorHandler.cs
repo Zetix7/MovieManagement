@@ -27,7 +27,8 @@ public class AddActorHandler : IRequestHandler<AddActorRequest, AddActorResponse
     {
         _logger.LogInformation("We are in Handle method in AddActorHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication == DataAccess.Entities.User.Role.None.ToString())
         {
             return new AddActorResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

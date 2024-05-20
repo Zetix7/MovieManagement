@@ -2,6 +2,6 @@
 
 namespace MovieManagement.ApplicationServices.API.Domain;
 
-public class GetUserByLoginResponse : ResponseBase<User>
+public class GetUserByUsernameResponse : ResponseBase<User>
 {
 }

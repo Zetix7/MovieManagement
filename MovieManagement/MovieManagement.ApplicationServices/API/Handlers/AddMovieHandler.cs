@@ -27,7 +27,8 @@ public class AddMovieHandler : IRequestHandler<AddMovieRequest, AddMovieResponse
     {
         _logger.LogInformation("We are in Handle method in AddMovieHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication == DataAccess.Entities.User.Role.None.ToString())
         {
             return new AddMovieResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }

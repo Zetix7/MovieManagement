@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+using MovieManagement.ApplicationServices.Components.PassworHasher;
 using MovieManagement.DataAccess.CQRS;
 using MovieManagement.DataAccess.CQRS.Queries;
 using MovieManagement.DataAccess.Entities;
@@ -14,15 +15,18 @@ namespace MovieManagement.Authentication;
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     private readonly IQueryExecutor _queryExecutor;
+    private readonly IPasswordHasher _passwordHasher;
 
     public BasicAuthenticationHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
         UrlEncoder encoder,
-        IQueryExecutor queryExecutor)
+        IQueryExecutor queryExecutor,
+        IPasswordHasher passwordHasher)
         : base(options, logger, encoder)
     {
         _queryExecutor = queryExecutor;
+        _passwordHasher = passwordHasher;
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -51,7 +55,9 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             var query = new GetUserQuery { Username = username };
             user = await _queryExecutor.Execute(query);
 
-            if (user is null || user.Password != password)
+            var verifyPassword = _passwordHasher.Verify(user.Password!, password);
+            //if (user is null || user.Password != password)
+            if (user is null || !verifyPassword)
             {
                 return AuthenticateResult.Fail("Wrong Username or Password");
             }

@@ -9,13 +9,13 @@ using MovieManagement.DataAccess.CQRS.Queries;
 
 namespace MovieManagement.ApplicationServices.API.Handlers;
 
-public class GetUserByLoginHandler : IRequestHandler<GetUserByLoginRequest, GetUserByLoginResponse>
+public class GetUserByUsernameHandler : IRequestHandler<GetUserByUsernameRequest, GetUserByUsernameResponse>
 {
     private readonly IMapper _mapper;
     private readonly IQueryExecutor _queryExecutor;
-    private readonly ILogger<GetUserByLoginHandler> _logger;
+    private readonly ILogger<GetUserByUsernameHandler> _logger;
 
-    public GetUserByLoginHandler(IMapper mapper, IQueryExecutor queryExecutor, ILogger<GetUserByLoginHandler> logger)
+    public GetUserByUsernameHandler(IMapper mapper, IQueryExecutor queryExecutor, ILogger<GetUserByUsernameHandler> logger)
     {
         _mapper = mapper;
         _queryExecutor = queryExecutor;
@@ -23,25 +23,25 @@ public class GetUserByLoginHandler : IRequestHandler<GetUserByLoginRequest, GetU
         _logger.LogInformation("We are in GetUserByLoginHandler class");
     }
 
-    public async Task<GetUserByLoginResponse> Handle(GetUserByLoginRequest request, CancellationToken token)
+    public async Task<GetUserByUsernameResponse> Handle(GetUserByUsernameRequest request, CancellationToken token)
     {
         _logger.LogInformation("We are in Handle method in GetUserByLoginHandler class");
 
         if (!request.IsActiveAuthentication
             || request.AccessLevelAuthentication != DataAccess.Entities.User.Role.AdministratorService.ToString())
         {
-            return new GetUserByLoginResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
+            return new GetUserByUsernameResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }
 
-        var query = new GetUserByLoginQuery { Login = request.Login };
+        var query = new GetUserByUsernameQuery { Username = request.Username };
         var user = await _queryExecutor.Execute(query);
         if (user is null)
         {
-            return new GetUserByLoginResponse { Error = new ErrorModel(ErrorType.NotFound) };
+            return new GetUserByUsernameResponse { Error = new ErrorModel(ErrorType.NotFound) };
         }
 
         var domainUser = _mapper.Map<User>(user);
-        var response = new GetUserByLoginResponse { Data = domainUser };
+        var response = new GetUserByUsernameResponse { Data = domainUser };
         return response;
     }
 }

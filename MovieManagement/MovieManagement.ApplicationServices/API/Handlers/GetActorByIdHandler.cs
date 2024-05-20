@@ -27,7 +27,8 @@ public class GetActorByIdHandler : IRequestHandler<GetActorByIdRequest, GetActor
     {
         _logger.LogInformation("We are in Handle method in GetActorByIdHandler class");
 
-        if (!request.IsActiveAuthentication)
+        if (!request.IsActiveAuthentication
+            || request.AccessLevelAuthentication == DataAccess.Entities.User.Role.None.ToString())
         {
             return new GetActorByIdResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }
