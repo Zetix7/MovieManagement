@@ -21,6 +21,10 @@ public class UsersProfile : Profile
             .ForMember(x => x.AccessLevel, y => y.MapFrom(z => z.AccessLevel))
             .ForMember(x => x.IsActive, y => y.MapFrom(z => z.IsActive));
 
+        CreateMap<UpdateMyPasswordRequest, DataAccess.Entities.User>()
+            .ForMember(x => x.Username, y => y.MapFrom(z => z.UsernameAuthentication))
+            .ForMember(x => x.Password, y => y.MapFrom(z => z.Password));
+
         CreateMap<DataAccess.Entities.User, User>()
             .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
             .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))

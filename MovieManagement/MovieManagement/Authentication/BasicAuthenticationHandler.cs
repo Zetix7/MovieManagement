@@ -56,7 +56,6 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             user = await _queryExecutor.Execute(query);
 
             var verifyPassword = _passwordHasher.Verify(user.Password!, password);
-            //if (user is null || user.Password != password)
             if (user is null || !verifyPassword)
             {
                 return AuthenticateResult.Fail("Wrong Username or Password");

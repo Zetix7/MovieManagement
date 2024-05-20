@@ -38,11 +38,8 @@ public class UpdateMyPasswordHandler : IRequestHandler<UpdateMyPasswordRequest, 
             return new UpdateMyPasswordResponse { Error = new ErrorModel(ErrorType.Unauthorized) };
         }
 
-        var entityUser = new DataAccess.Entities.User
-        {
-            Username = request.UsernameAuthentication,
-            Password = _passwordHasher.Hash(request.Password!)
-        };
+        var entityUser = _mapper.Map<DataAccess.Entities.User>(request);
+        entityUser.Password = _passwordHasher.Hash(request.Password!);
         var command = new UpdateMyPasswordCommand { Parameter = entityUser };
         var updatedUser = await _commandExecutor.Execute(command);
         if (updatedUser.Id == 0)
