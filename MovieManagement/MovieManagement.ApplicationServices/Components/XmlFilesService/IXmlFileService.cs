@@ -6,4 +6,5 @@ public interface IXmlFileService
 {
     Task ExportUsersXmlFile();
     Task ExportActorsXmlFile();
+    Task ExportMoviesXmlFile();
 }

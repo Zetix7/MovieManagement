@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Movies>
+  <Movie Id="2" Title="Iron Man" Year="2008" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Robert Downey Jr</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="3" Title="Incredible Hulk" Year="2008" Universe="Marvel" BoxOffice="c">
+    <Cast />
+  </Movie>
+  <Movie Id="4" Title="Iron Man 2" Year="2010" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Robert Downey Jr</Actor>
+      <Actor>Scarlett Johansson</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="9" Title="Thor" Year="2011" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Natalie Portman</Actor>
+      <Actor>Chris Hemsworth</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="12" Title="Avengers" Year="2012" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Robert Downey Jr</Actor>
+      <Actor>Chris Evans</Actor>
+      <Actor>Scarlett Johansson</Actor>
+      <Actor>Natalie Portman</Actor>
+      <Actor>Chris Hemsworth</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="13" Title="Thor The Dark World" Year="2013" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Natalie Portman</Actor>
+      <Actor>Chris Hemsworth</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="15" Title="Iron Man 3" Year="2013" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Robert Downey Jr</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="17" Title="The Fast and the Furious" Year="2001" Universe="Fast and Furious" BoxOffice="c">
+    <Cast>
+      <Actor>Vin Diesel</Actor>
+      <Actor>Paul Walker</Actor>
+    </Cast>
+  </Movie>
+  <Movie Id="18" Title="Captain America: The First Avenger" Year="2011" Universe="Marvel" BoxOffice="c">
+    <Cast>
+      <Actor>Chris Evans</Actor>
+      <Actor>Hayley Atwell</Actor>
+    </Cast>
+  </Movie>
+</Movies>

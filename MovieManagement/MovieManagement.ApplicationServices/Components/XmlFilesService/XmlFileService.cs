@@ -44,6 +44,7 @@ public class XmlFileService : IXmlFileService
 
         var elements = new XElement("Actors", domainActors.Select(x =>
             new XElement("Actor",
+                new XAttribute("Id", x.Id!),
                 new XAttribute("FirstName", x.FirstName!),
                 new XAttribute("LastName", x.LastName!),
                 new XElement("MovieTitleLists", x.MovieTitleList!.Select(x =>
@@ -52,5 +53,25 @@ public class XmlFileService : IXmlFileService
 
         var document = new XDocument(elements);
         document.Save(@"Resources\Files\Actors.xml");
+    }
+
+    public async Task ExportMoviesXmlFile()
+    {
+        var query = new GetMoviesQuery();
+        var movies = await _queryExecutor.Execute(query);
+        var domainMovies = _mapper.Map<List<Movie>>(movies);
+
+        var elements = new XElement("Movies", domainMovies.Select(x =>
+            new XElement("Movie",
+                new XAttribute("Id", x.Id!),
+                new XAttribute("Title", x.Title!),
+                new XAttribute("Year", x.Year!),
+                new XAttribute("Universe", x.Universe!),
+                new XAttribute("BoxOffice", string.Format("c", x.BoxOffice)),
+                new XElement("Cast", x.Cast!.Select(x =>
+                    new XElement("Actor", x))))));
+
+        var document = new XDocument(elements);
+        document.Save(@"Resources\Files\Movies.xml");
     }
 }

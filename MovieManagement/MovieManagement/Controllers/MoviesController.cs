@@ -55,4 +55,11 @@ public class MoviesController : ApiControllerBase
         var request = new RemoveMovieByIdRequest() { Id = movieId };
         return await HandleRequest<RemoveMovieByIdRequest, RemoveMovieByIdResponse>(request);
     }
+
+    [HttpGet]
+    [Route("export")]
+    public async Task<IActionResult> ExportMoviesXmlFile(ExportMoviesXmlFileRequest request)
+    {
+        return await HandleRequest<ExportMoviesXmlFileRequest, ExportMoviesXmlFileResponse>(request);
+    }
 }
