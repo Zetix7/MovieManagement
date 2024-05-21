@@ -64,4 +64,12 @@ public class UsersController : ApiControllerBase
         _logger.LogInformation("We are in UpdateMyPassword method - EndPoint PUT");
         return await HandleRequest<UpdateMyPasswordRequest, UpdateMyPasswordResponse>(request);
     }
+
+    [HttpGet]
+    [Route("export")]
+    public async Task<IActionResult> ExportUsersXmlFile([FromQuery] ExportUsersXmlFileRequest request)
+    {
+        _logger.LogInformation("We are in ExportUsersXmlFile method - EndPoint GET");
+        return await HandleRequest<ExportUsersXmlFileRequest, ExportUsersXmlFileResponse>(request);
+    }
 }

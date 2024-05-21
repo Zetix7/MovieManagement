@@ -30,4 +30,14 @@
     <ProjectReference Include="..\MovieManagement.DataAccess\MovieManagement.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Files\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Files\Users.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

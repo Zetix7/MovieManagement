@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Users>
+  <User Id="1" FirstName="Greg" LastName="Zet" Username="greg1234" AccessLevel="AdministratorService" IsActive="true" />
+  <User Id="2" FirstName="Chris" LastName="Evans" Username="chris123" AccessLevel="UserService" IsActive="true" />
+  <User Id="3" FirstName="Elizabeth" LastName="Olsen" Username="elizabeth" AccessLevel="None" IsActive="false" />
+  <User Id="4" FirstName="Robert" LastName="Downey Jr" Username="robert12" AccessLevel="AdministratorService" IsActive="true" />
+  <User Id="5" FirstName="Gal" LastName="Gadot" Username="gal12345" AccessLevel="UserService" IsActive="true" />
+</Users>

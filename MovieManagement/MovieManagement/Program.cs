@@ -9,6 +9,7 @@ using MovieManagement.ApplicationServices.API.Domain;
 using MovieManagement.ApplicationServices.API.Validators;
 using MovieManagement.ApplicationServices.Components.OpenWeather;
 using MovieManagement.ApplicationServices.Components.PassworHasher;
+using MovieManagement.ApplicationServices.Components.XmlFilesService;
 using MovieManagement.ApplicationServices.Mappings;
 using MovieManagement.Authentication;
 using MovieManagement.DataAccess;
@@ -33,6 +34,7 @@ builder.Services.AddTransient<IOpenWeatherConnector, OpenWeatherConnector>();
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IXmlFileService, XmlFileService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
