@@ -67,7 +67,7 @@ public class UsersController : ApiControllerBase
 
     [HttpGet]
     [Route("export")]
-    public async Task<IActionResult> ExportUsersXmlFile([FromQuery] ExportUsersXmlFileRequest request)
+    public async Task<IActionResult> ExportUsersXmlFile(ExportUsersXmlFileRequest request)
     {
         _logger.LogInformation("We are in ExportUsersXmlFile method - EndPoint GET");
         return await HandleRequest<ExportUsersXmlFileRequest, ExportUsersXmlFileResponse>(request);

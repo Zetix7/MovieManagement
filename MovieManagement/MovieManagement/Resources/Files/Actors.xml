@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Actors>
+  <Actor FirstName="Robert" LastName="Downey Jr">
+    <MovieTitleLists>
+      <Title>Iron Man (2008)</Title>
+      <Title>Iron Man 2 (2010)</Title>
+      <Title>Avengers (2012)</Title>
+      <Title>Iron Man 3 (2013)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Elizabeth" LastName="Olsen">
+    <MovieTitleLists />
+  </Actor>
+  <Actor FirstName="Chris" LastName="Evans">
+    <MovieTitleLists>
+      <Title>Avengers (2012)</Title>
+      <Title>Captain America: The First Avenger (2011)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Scarlett" LastName="Johansson">
+    <MovieTitleLists>
+      <Title>Iron Man 2 (2010)</Title>
+      <Title>Avengers (2012)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Natalie" LastName="Portman">
+    <MovieTitleLists>
+      <Title>Thor (2011)</Title>
+      <Title>Avengers (2012)</Title>
+      <Title>Thor The Dark World (2013)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Chris" LastName="Hemsworth">
+    <MovieTitleLists>
+      <Title>Thor (2011)</Title>
+      <Title>Avengers (2012)</Title>
+      <Title>Thor The Dark World (2013)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Vin" LastName="Diesel">
+    <MovieTitleLists>
+      <Title>The Fast and the Furious (2001)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Paul" LastName="Walker">
+    <MovieTitleLists>
+      <Title>The Fast and the Furious (2001)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Gal" LastName="Gadot">
+    <MovieTitleLists />
+  </Actor>
+  <Actor FirstName="Hayley" LastName="Atwell">
+    <MovieTitleLists>
+      <Title>Captain America: The First Avenger (2011)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor FirstName="Tom" LastName="Holland">
+    <MovieTitleLists />
+  </Actor>
+</Actors>

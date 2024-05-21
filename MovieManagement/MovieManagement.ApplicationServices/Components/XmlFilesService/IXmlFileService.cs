@@ -5,4 +5,5 @@ namespace MovieManagement.ApplicationServices.Components.XmlFilesService;
 public interface IXmlFileService
 {
     Task ExportUsersXmlFile();
+    Task ExportActorsXmlFile();
 }

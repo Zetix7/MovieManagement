@@ -55,4 +55,12 @@ public class ActorsController : ApiControllerBase
         var request = new RemoveActorByIdRequest { Id = actorId };
         return await HandleRequest<RemoveActorByIdRequest, RemoveActorByIdResponse>(request);
     }
+
+    [HttpGet]
+    [Route("export")]
+    public async Task<IActionResult> ExportActorsXmlFile(ExportActorsXmlFileRequest request)
+    {
+        _logger.LogInformation("We are in ExportActorsXmlFile method - EndPoint GET");
+        return await HandleRequest<ExportActorsXmlFileRequest, ExportActorsXmlFileResponse>(request);
+    }
 }
