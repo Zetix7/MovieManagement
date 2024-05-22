@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.DataAccess.CQRS;
-using MovieManagement.DataAccess.CQRS.Commands;
 using MovieManagement.DataAccess.CQRS.Queries;
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace MovieManagement.ApplicationServices.Components.XmlFilesService;
@@ -70,7 +70,7 @@ public class XmlFileService : IXmlFileService
                 new XAttribute("Title", x.Title!),
                 new XAttribute("Year", x.Year!),
                 new XAttribute("Universe", x.Universe!),
-                new XAttribute("BoxOffice", string.Format("c", x.BoxOffice)),
+                new XAttribute("BoxOffice", x.BoxOffice),
                 new XElement("Cast", x.Cast!.Select(x =>
                     new XElement("Actor", x))))));
 
@@ -108,5 +108,39 @@ public class XmlFileService : IXmlFileService
         }
 
         return actors;
+    }
+
+    public List<Movie> ImportMoviesXmlFile()
+    {
+        if (!File.Exists(@"Resources\Files\Movies.xml"))
+        {
+            throw new FileNotFoundException("Not Found 'Movies.xml' file!");
+        }
+
+        if (new FileInfo(@"Resources\Files\Movies.xml").Length < 1)
+        {
+            throw new FileLoadException("File 'Movies.xml' is empty!");
+        }
+
+        var xmlActors = XDocument.Load(@"Resources\Files\Movies.xml");
+
+        List<Movie> movies;
+        try
+        {
+            movies = xmlActors.Element("Movies")!
+                .Elements("Movie").Select(x => new Movie
+                {
+                    Title = x.Attribute("Title")!.Value,
+                    Year = int.Parse(x.Attribute("Year")!.Value),
+                    Universe = x.Attribute("Universe")!.Value,
+                    BoxOffice = decimal.Parse(x.Attribute("BoxOffice")!.Value, CultureInfo.InvariantCulture)
+                }).ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("File 'Movies.xml' is broken!");
+        }
+
+        return movies;
     }
 }

@@ -48,7 +48,9 @@
     </MovieTitleLists>
   </Actor>
   <Actor Id="1033" FirstName="Gal" LastName="Gadot">
-    <MovieTitleLists />
+    <MovieTitleLists>
+      <Title>Batman v Superman: Dawn of Justice (2016)</Title>
+    </MovieTitleLists>
   </Actor>
   <Actor Id="2032" FirstName="Hayley" LastName="Atwell">
     <MovieTitleLists>
@@ -59,7 +61,9 @@
     <MovieTitleLists />
   </Actor>
   <Actor Id="2034" FirstName="Jordana" LastName="Brewster">
-    <MovieTitleLists />
+    <MovieTitleLists>
+      <Title>The Fast and the Furious (2001)</Title>
+    </MovieTitleLists>
   </Actor>
   <Actor Id="2035" FirstName="Tyrese" LastName="Gibson">
     <MovieTitleLists />
@@ -68,6 +72,11 @@
     <MovieTitleLists />
   </Actor>
   <Actor Id="2037" FirstName="Jason" LastName="Mamoa">
+    <MovieTitleLists>
+      <Title>Batman v Superman: Dawn of Justice (2016)</Title>
+    </MovieTitleLists>
+  </Actor>
+  <Actor Id="2038" FirstName="Brie" LastName="Larson">
     <MovieTitleLists />
   </Actor>
 </Actors>

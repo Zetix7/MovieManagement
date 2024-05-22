@@ -8,4 +8,5 @@ public interface IXmlFileService
     Task ExportActorsXmlFile();
     Task ExportMoviesXmlFile();
     List<Actor> ImportActorsXmlFile();
+    List<Movie> ImportMoviesXmlFile();
 }
