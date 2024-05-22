@@ -58,4 +58,16 @@
   <Actor Id="2033" FirstName="Tom" LastName="Holland">
     <MovieTitleLists />
   </Actor>
+  <Actor Id="2034" FirstName="Jordana" LastName="Brewster">
+    <MovieTitleLists />
+  </Actor>
+  <Actor Id="2035" FirstName="Tyrese" LastName="Gibson">
+    <MovieTitleLists />
+  </Actor>
+  <Actor Id="2036" FirstName="Jason" LastName="Statham">
+    <MovieTitleLists />
+  </Actor>
+  <Actor Id="2037" FirstName="Jason" LastName="Mamoa">
+    <MovieTitleLists />
+  </Actor>
 </Actors>

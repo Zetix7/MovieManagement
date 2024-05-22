@@ -63,4 +63,12 @@ public class ActorsController : ApiControllerBase
         _logger.LogInformation("We are in ExportActorsXmlFile method - EndPoint GET");
         return await HandleRequest<ExportActorsXmlFileRequest, ExportActorsXmlFileResponse>(request);
     }
+
+    [HttpPost]
+    [Route("import")]
+    public async Task<IActionResult> ImportActorsXmlFile(ImportActorsXmlFileRequest request)
+    {
+        _logger.LogInformation("We are in ImportActorsXmlFile method - EndPoint POST");
+        return await HandleRequest<ImportActorsXmlFileRequest, ImportActorsXmlFileResponse>(request);
+    }
 }

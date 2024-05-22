@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MovieManagement.ApplicationServices.API.Domain.Models;
 using MovieManagement.DataAccess.CQRS;
+using MovieManagement.DataAccess.CQRS.Commands;
 using MovieManagement.DataAccess.CQRS.Queries;
 using System.Xml.Linq;
 
@@ -10,11 +11,13 @@ public class XmlFileService : IXmlFileService
 {
     private readonly IMapper _mapper;
     private readonly IQueryExecutor _queryExecutor;
+    private readonly ICommandExecutor _commandExecutor;
 
-    public XmlFileService(IMapper mapper, IQueryExecutor queryExecutor)
+    public XmlFileService(IMapper mapper, IQueryExecutor queryExecutor, ICommandExecutor commandExecutor)
     {
         _mapper = mapper;
         _queryExecutor = queryExecutor;
+        _commandExecutor = commandExecutor;
     }
 
     public async Task ExportUsersXmlFile()
@@ -73,5 +76,37 @@ public class XmlFileService : IXmlFileService
 
         var document = new XDocument(elements);
         document.Save(@"Resources\Files\Movies.xml");
+    }
+
+    public List<Actor> ImportActorsXmlFile()
+    {
+        if (!File.Exists(@"Resources\Files\Actors.xml"))
+        {
+            throw new FileNotFoundException("Not Found 'Actors.xml' file!");
+        }
+
+        if (new FileInfo(@"Resources\Files\Actors.xml").Length < 1)
+        {
+            throw new FileLoadException("File 'Actors.xml' is empty!");
+        }
+
+        var xmlActors = XDocument.Load(@"Resources\Files\Actors.xml");
+
+        List<Actor> actors;
+        try
+        {
+            actors = xmlActors.Element("Actors")!
+                .Elements("Actor").Select(x => new Actor
+                {
+                    FirstName = x.Attribute("FirstName")!.Value,
+                    LastName = x.Attribute("LastName")!.Value
+                }).ToList();
+        }
+        catch (Exception)
+        {
+            throw new Exception("File 'Actors.xml' is broken!");
+        }
+
+        return actors;
     }
 }
