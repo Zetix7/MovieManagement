@@ -131,7 +131,7 @@ public class XmlFileService : IXmlFileService
                 .Elements("Movie").Select(x => new Movie
                 {
                     Title = x.Attribute("Title")!.Value,
-                    Year = int.Parse(x.Attribute("Year")!.Value),
+                    Year = int.Parse(x.Attribute("Year")!.Value, CultureInfo.InvariantCulture),
                     Universe = x.Attribute("Universe")!.Value,
                     BoxOffice = decimal.Parse(x.Attribute("BoxOffice")!.Value, CultureInfo.InvariantCulture)
                 }).ToList();
