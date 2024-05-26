@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /MovieManagement/MovieManagement/Resources/Files/Actors.xml
 /MovieManagement/MovieManagement/Resources/Files/Movies.xml
+/MovieManagement/MovieManagement/Resources/Files/Users.xml

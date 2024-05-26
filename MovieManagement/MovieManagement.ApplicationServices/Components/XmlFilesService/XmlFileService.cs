@@ -90,11 +90,11 @@ public class XmlFileService : IXmlFileService
             throw new FileLoadException("File 'Actors.xml' is empty!");
         }
 
-        var xmlActors = XDocument.Load(@"Resources\Files\Actors.xml");
-
         List<Actor> actors;
         try
         {
+            var xmlActors = XDocument.Load(@"Resources\Files\Actors.xml");
+            
             actors = xmlActors.Element("Actors")!
                 .Elements("Actor").Select(x => new Actor
                 {
@@ -122,11 +122,11 @@ public class XmlFileService : IXmlFileService
             throw new FileLoadException("File 'Movies.xml' is empty!");
         }
 
-        var xmlActors = XDocument.Load(@"Resources\Files\Movies.xml");
-
-        List<Movie> movies;
+List<Movie> movies;
         try
         {
+            var xmlActors = XDocument.Load(@"Resources\Files\Movies.xml");
+
             movies = xmlActors.Element("Movies")!
                 .Elements("Movie").Select(x => new Movie
                 {
