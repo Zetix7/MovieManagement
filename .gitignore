@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/MovieManagement/MovieManagement/Resources/Files/Actors.xml
+/MovieManagement/MovieManagement/Resources/Files/Movies.xml
