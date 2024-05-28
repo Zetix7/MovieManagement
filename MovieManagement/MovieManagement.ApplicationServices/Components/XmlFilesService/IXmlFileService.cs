@@ -7,6 +7,6 @@ public interface IXmlFileService
     Task ExportUsersXmlFile();
     Task ExportActorsXmlFile();
     Task ExportMoviesXmlFile();
-    List<Actor> ImportActorsXmlFile();
-    List<Movie> ImportMoviesXmlFile();
+    List<Actor> ImportActorsXmlFile(string path);
+    List<Movie> ImportMoviesXmlFile(string path);
 }

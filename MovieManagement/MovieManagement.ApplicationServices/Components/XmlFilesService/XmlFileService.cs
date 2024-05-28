@@ -78,14 +78,14 @@ public class XmlFileService : IXmlFileService
         document.Save(@"Resources\Files\Movies.xml");
     }
 
-    public List<Actor> ImportActorsXmlFile()
+    public List<Actor> ImportActorsXmlFile(string path)
     {
-        if (!File.Exists(@"Resources\Files\Actors.xml"))
+        if (!File.Exists(path))
         {
             throw new FileNotFoundException("Not Found 'Actors.xml' file!");
         }
 
-        if (new FileInfo(@"Resources\Files\Actors.xml").Length < 1)
+        if (new FileInfo(path).Length < 1)
         {
             throw new FileLoadException("File 'Actors.xml' is empty!");
         }
@@ -93,8 +93,8 @@ public class XmlFileService : IXmlFileService
         List<Actor> actors;
         try
         {
-            var xmlActors = XDocument.Load(@"Resources\Files\Actors.xml");
-            
+            var xmlActors = XDocument.Load(path);
+
             actors = xmlActors.Element("Actors")!
                 .Elements("Actor").Select(x => new Actor
                 {
@@ -110,22 +110,22 @@ public class XmlFileService : IXmlFileService
         return actors;
     }
 
-    public List<Movie> ImportMoviesXmlFile()
+    public List<Movie> ImportMoviesXmlFile(string path)
     {
-        if (!File.Exists(@"Resources\Files\Movies.xml"))
+        if (!File.Exists(path))
         {
             throw new FileNotFoundException("Not Found 'Movies.xml' file!");
         }
 
-        if (new FileInfo(@"Resources\Files\Movies.xml").Length < 1)
+        if (new FileInfo(path).Length < 1)
         {
             throw new FileLoadException("File 'Movies.xml' is empty!");
         }
 
-List<Movie> movies;
+        List<Movie> movies;
         try
         {
-            var xmlActors = XDocument.Load(@"Resources\Files\Movies.xml");
+            var xmlActors = XDocument.Load(path);
 
             movies = xmlActors.Element("Movies")!
                 .Elements("Movie").Select(x => new Movie

@@ -38,7 +38,7 @@ public class ImportMoviesXmlFileHandler : IRequestHandler<ImportMoviesXmlFileReq
 
         try
         {
-            domainMovies = _xmlFileService.ImportMoviesXmlFile();
+            domainMovies = _xmlFileService.ImportMoviesXmlFile(@"Resources\Files\Movies.xml");
         }
         catch (FileNotFoundException)
         {

@@ -39,7 +39,7 @@ public class ImportActorsXmlFileHandler : IRequestHandler<ImportActorsXmlFileReq
 
         try
         {
-            domainActors = _xmlFileService.ImportActorsXmlFile();
+            domainActors = _xmlFileService.ImportActorsXmlFile(@"Resources\Files\Actors.xml");
         }
         catch (FileNotFoundException)
         {
