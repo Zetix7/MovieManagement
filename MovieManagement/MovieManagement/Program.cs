@@ -20,7 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<MovieManagementStorageContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MovieManagementDatabaseConnection")));
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddAutoMapper(typeof(MoviesProfile).Assembly);
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
