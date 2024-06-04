@@ -21,10 +21,7 @@ public class XmlFileServiceTests : TestsBase
         Assert.IsTrue(result);
 
         // delete file
-        if (File.Exists(_Path))
-        {
-            File.Delete(_Path);
-        }
+        DeleteTempXmlFile();
     }
 
     [TestMethod]
@@ -43,10 +40,7 @@ public class XmlFileServiceTests : TestsBase
         Assert.IsTrue(result);
 
         // delete file
-        if (File.Exists(_Path))
-        {
-            File.Delete(_Path);
-        }
+        DeleteTempXmlFile();
     }
 
     [TestMethod]
@@ -65,9 +59,6 @@ public class XmlFileServiceTests : TestsBase
         Assert.IsTrue(result);
 
         // delete file
-        if (File.Exists(_Path))
-        {
-            File.Delete(_Path);
-        }
+        DeleteTempXmlFile();
     }
 }

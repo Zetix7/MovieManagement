@@ -58,7 +58,7 @@ public class MoviesController : ApiControllerBase
 
     [HttpGet]
     [Route("export")]
-    public async Task<IActionResult> ExportMoviesXmlFile(ExportMoviesXmlFileRequest request)
+    public async Task<IActionResult> ExportMoviesXmlFile([FromQuery] ExportMoviesXmlFileRequest request)
     {
         _logger.LogInformation("We are in ExportMoviesXmlFile method - EndPoint DELETE");
         return await HandleRequest<ExportMoviesXmlFileRequest, ExportMoviesXmlFileResponse>(request);
@@ -66,7 +66,7 @@ public class MoviesController : ApiControllerBase
 
     [HttpPost]
     [Route("import")]
-    public async Task<IActionResult> ImportMoviesXmlFile(ImportMoviesXmlFileRequest request)
+    public async Task<IActionResult> ImportMoviesXmlFile([FromQuery] ImportMoviesXmlFileRequest request)
     {
         _logger.LogInformation("We are in ImportMoviesXmlFile method - EndPoint DELETE");
         return await HandleRequest<ImportMoviesXmlFileRequest, ImportMoviesXmlFileResponse>(request);

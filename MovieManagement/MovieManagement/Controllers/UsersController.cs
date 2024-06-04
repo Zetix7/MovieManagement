@@ -33,10 +33,10 @@ public class UsersController : ApiControllerBase
 
     [HttpGet]
     [Route("{username}")]
-    public async Task<IActionResult> GetUserByLogin([FromRoute] string username, GetUserByUsernameRequest request)
+    public async Task<IActionResult> GetUserByUsername([FromRoute] string username)
     {
         _logger.LogInformation("We are in GetUserByLogin method - EndPoint GET");
-        request.Username = username;
+        var request = new GetUserByUsernameRequest { Username = username };
         return await HandleRequest<GetUserByUsernameRequest, GetUserByUsernameResponse>(request);
     }
 
@@ -67,7 +67,7 @@ public class UsersController : ApiControllerBase
 
     [HttpGet]
     [Route("export")]
-    public async Task<IActionResult> ExportUsersXmlFile(ExportUsersXmlFileRequest request)
+    public async Task<IActionResult> ExportUsersXmlFile([FromQuery] ExportUsersXmlFileRequest request)
     {
         _logger.LogInformation("We are in ExportUsersXmlFile method - EndPoint GET");
         return await HandleRequest<ExportUsersXmlFileRequest, ExportUsersXmlFileResponse>(request);

@@ -20,4 +20,12 @@ public class TestsBase
             _Path = _Path.Replace("[FileName]", name);
         }
     }
+
+    protected void DeleteTempXmlFile()
+    {
+        if (File.Exists(_Path))
+        {
+            File.Delete(_Path);
+        }
+    }
 }

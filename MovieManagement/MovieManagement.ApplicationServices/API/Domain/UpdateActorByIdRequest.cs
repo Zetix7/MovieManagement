@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MovieManagement.ApplicationServices.API.Domain.Models;
 
 namespace MovieManagement.ApplicationServices.API.Domain;
 
